@@ -1,0 +1,33 @@
+.navbarContainer {
+  margin-top: 20px;
+}
+.navbarList {
+  margin-left: 30px;
+}
+.navbarList_text {
+  font-size: 20px;
+  color: black !important;
+  margin-left: 20px;
+}
+
+.buttonSignUp {
+  padding: 5px 50px;
+  background-color: rgba(95, 46, 234, 1);
+  color: white;
+  border-radius: 5px;
+  margin-right: 50px;
+}
+
+@media (max-width: 376px) {
+  .imgLogo {
+    margin-left: 20px;
+  }
+  .navbarList_text {
+    margin-left: 0px;
+  }
+  .buttonSignUp {
+    padding: 3px 20px;
+    margin-left: 20px;
+    margin-top: 20px;
+  }
+}
