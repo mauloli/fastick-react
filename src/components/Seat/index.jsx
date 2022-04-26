@@ -16,11 +16,12 @@ function Seat(props) {
   };
 
   return (
-    <div className="seat">
+    <div className={styles.seat} style={{ width: "100%" }}>
       <div className={`row ${styles.seatRow}`}>
-        <div className="col">{rowSeat}</div>
-        <div className={`col ${styles.seatList_container}`}>
-          {leftSeat.map((item) => (
+        <div className={`col ${styles.seatLetter}`}>{rowSeat}</div>
+
+        {leftSeat.map((item) => (
+          <div className={`col ${styles.seatList_container}`} key={item}>
             <div
               className={`${styles.seatList} ${
                 reserved.includes(item)
@@ -33,14 +34,14 @@ function Seat(props) {
                 // eslint-disable-next-line no-unused-expressions
                 reserved.includes(item) ? null : selectedSeat(item);
               }}
-            >
-              {item}
-            </div>
-          ))}
-        </div>
+            ></div>
+          </div>
+        ))}
+
         <div className="col"></div>
-        <div className={`col ${styles.seatList_container}`}>
-          {rightSeat.map((item) => (
+
+        {rightSeat.map((item) => (
+          <div className={`col ${styles.seatList_container}`}>
             <div
               className={`${styles.seatList} ${
                 reserved.includes(item)
@@ -53,11 +54,9 @@ function Seat(props) {
                 // eslint-disable-next-line no-unused-expressions
                 reserved.includes(item) ? null : selectedSeat(item);
               }}
-            >
-              {item}
-            </div>
-          ))}
-        </div>
+            ></div>
+          </div>
+        ))}
       </div>
     </div>
   );

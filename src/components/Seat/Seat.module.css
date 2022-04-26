@@ -1,23 +1,27 @@
+.seat {
+  /* margin-right: 100px; */
+}
 .seatRow {
   flex-wrap: nowrap !important;
+  margin-right: 100px !important;
+  margin-left: 100px !important;
 }
 .seatRow .col {
   padding: 0px 5px;
 }
-
+.seatList_container {
+  padding: 0px !important;
+}
 .seatList {
   width: 20px;
   height: 20px;
   border-radius: 25%;
 
   cursor: pointer;
-  /* display: inline; */
-  margin: 0 5px;
+  margin: 0 0px !important;
 }
 
 .seatList:hover {
-  width: 25px;
-  height: 25px;
 }
 
 .seatList_available {
@@ -30,4 +34,28 @@
 
 .seatList_sold {
   background-color: #6e7191;
+}
+
+@media (max-width: 376px) {
+  .seat {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+  }
+  .seatRow {
+    /* display: flex !important; */
+    /* width: 100px; */
+    margin-left: 10px !important;
+    width: 300px;
+  }
+  .seatRow .seatList_container {
+    padding: 0px !important;
+  }
+  .seatLetter {
+    display: none;
+  }
+  .seatList {
+    width: 14px;
+    height: 14px;
+    margin: 0px;
+  }
 }

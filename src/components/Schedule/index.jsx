@@ -2,12 +2,12 @@ import React from "react";
 import styles from "./Schedule.module.css";
 import { Link, useNavigate } from "react-router-dom";
 function Schedule(props) {
-  const { premier, location, time, price } = props.schedule;
+  const { premier, location, time, price, movieId } = props.schedule;
   const timeSchedule = time.split(",");
 
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate("/order");
+    navigate("/order", { state: { premier } });
   };
   return (
     <div className={styles.showTime}>
@@ -18,7 +18,7 @@ function Schedule(props) {
               <img src={require(`../../assets/${premier}.png`)} alt="" />
             </div>
             <div className={styles.borderHeader_text} style={{ flex: "1" }}>
-              <span style={{ fontWeight: "bold", fontSize: "20px" }}>ebv.id</span>
+              <span style={{ fontWeight: "bold", fontSize: "20px" }}>{premier}</span>
               <span style={{ fontSize: "12px", display: "block", color: "rgba(110, 113, 145, 1)" }}>
                 {location}
               </span>
