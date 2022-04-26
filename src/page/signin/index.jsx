@@ -19,6 +19,9 @@ function SignIn() {
     try {
       event.preventDefault();
       const resultLogin = await axios.post("auth/login", form);
+      setMessage(resultLogin.data.msg);
+      localStorage.setItem("token", resultLogin.data.data.token);
+      localStorage.setItem("refreshToken", resultLogin.data.data.refreshToken);
       const resultUser = await axios.get(`user/${resultLogin.data.data.id}`);
       setMessage(resultLogin.data.msg);
       setIsError(false);

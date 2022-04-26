@@ -1,11 +1,9 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
 import styles from "./Card.module.css";
-import MovieDetails from "../../page/MovieDetails";
 
 function index(props) {
   const { name, category, id, image } = props.data;
-  // console.log(props);
 
   return (
     <div>
@@ -16,7 +14,7 @@ function index(props) {
               src={`https://res.cloudinary.com/dfoi1ro2a/image/upload/v1649233762/${image}`}
               className={styles.cardImg}
             />
-            <div className={styles.cardHover}>
+            <div className={styles.cardUpcoming}>
               <Card.Text className={`${styles.cardTextTittle}`}>{name}</Card.Text>
               <Card.Text className={`${styles.cardTextCat}`}>{category}</Card.Text>
               <div className={styles.buttonCard}>

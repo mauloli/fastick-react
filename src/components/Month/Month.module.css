@@ -1,0 +1,13 @@
+.buttonContainer {
+  white-space: nowrap;
+  overflow-x: auto;
+}
+.buttonContainer::-webkit-scrollbar {
+  width: 0px;
+}
+.buttonContainer button {
+  padding: 2px 50px;
+  margin: 40px 20px;
+  color: rgba(95, 46, 234, 1);
+  border-color: rgba(95, 46, 234, 1);
+}

@@ -1,0 +1,60 @@
+.showTime {
+  margin-top: 30px;
+  padding: 0px auto;
+  text-align: center;
+  display: inline-block;
+}
+
+.showTime_border {
+  display: inline-block;
+  background-color: white;
+  width: 331px;
+  height: 300px;
+  margin: 16px 16px;
+  border-radius: 8px;
+  box-shadow: 0px 8px 16px rgba(186, 186, 186, 0.24);
+  vertical-align: top;
+  text-align: justify;
+}
+
+.borderContainer {
+  height: 300px;
+}
+.borderHeader {
+  display: flex;
+  /* flex-direction: row; */
+  height: 100px;
+}
+.borderHeader_logo {
+  text-align: center;
+  margin: auto;
+}
+.borderHeader_logo img {
+  width: 100px;
+}
+.borderHeader_text {
+  text-align: left;
+  width: 165px;
+  margin: 15px 0px;
+}
+
+.borderTime {
+  font-size: 12px;
+  color: rgba(110, 113, 145, 1);
+}
+.borderPrice {
+  display: flex;
+  justify-content: space-between;
+}
+.borderButton button {
+  padding: 5px 100px;
+  background-color: rgba(95, 46, 234, 1);
+  color: white;
+}
+
+@media (max-width: 376px) {
+  .showTime {
+    width: 100%;
+    margin: 70px 0px 0px 0px;
+  }
+}

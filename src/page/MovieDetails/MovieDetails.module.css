@@ -1,0 +1,133 @@
+.articleMain {
+  height: 400px;
+}
+.articleMain .articleMain_img {
+  display: flex;
+  width: 332px;
+  height: 458px;
+  margin: auto;
+  background-color: white;
+  border: solid 1px rgba(222, 222, 222, 1);
+  border-radius: 20px;
+}
+
+.article {
+  margin-top: 100px;
+  height: 500px;
+}
+.articleImage {
+  /* display: flex; */
+  margin: auto auto;
+}
+
+.articleImage > img {
+  height: 362px;
+  width: 236px;
+  object-fit: cover;
+}
+
+.articleText {
+  margin-top: 25px;
+}
+.articleText h1 {
+  font-family: "Mulish", sans-serif;
+  font-size: 32px;
+  font-weight: bold;
+}
+.articleText_title h1 {
+  font-size: xx-large;
+}
+.articleText_title span {
+  color: rgba(78, 75, 102, 1);
+}
+
+.articleText_details {
+  display: flex;
+  margin-top: 30px;
+}
+
+.detailsDate_duration {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+.detailsDate_duration .spanRelease {
+  font-size: 14px;
+  color: rgba(134, 146, 166, 1);
+}
+.detailsDate_duration .spanDuration {
+  font-size: 14px;
+  color: rgba(134, 146, 166, 1);
+  margin-top: 20px;
+}
+.detailsDirect_cast {
+  display: flex;
+  flex: 2;
+  flex-direction: column;
+}
+
+.detailsDirect_cast .spanDirect {
+  font-size: 14px;
+  color: rgba(134, 146, 166, 1);
+}
+
+.spanCast {
+  font-size: 14px;
+  color: rgba(134, 146, 166, 1);
+  margin-top: 20px;
+}
+
+.thirdSection {
+  height: 100%;
+  background-color: rgba(245, 246, 248, 1);
+  padding-bottom: 100px;
+}
+
+.header {
+  text-align: center;
+  padding-top: 70px;
+}
+.input,
+.select {
+  margin: 20px 12px;
+}
+.select {
+  width: 143px;
+  height: 28px;
+}
+
+@media (max-width: 376px) {
+  .article {
+    margin-top: 50px;
+  }
+  .articleMain {
+    width: 100%;
+  }
+  .articleMain_img {
+    height: 380px !important;
+    width: 250px !important;
+  }
+  .articleImage img {
+    height: 330px;
+    width: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  .articleMain_text {
+    width: 365px !important;
+    height: 620px;
+    margin-top: 50px;
+    margin-left: 20px;
+  }
+  .articleText_details {
+    display: flex;
+    justify-content: space-between;
+  }
+  .detailsDate_duration {
+    padding-right: 30px;
+  }
+  .thirdSection {
+    margin-top: 500px;
+    height: 100%;
+  }
+}

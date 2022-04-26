@@ -1,0 +1,33 @@
+.seatRow {
+  flex-wrap: nowrap !important;
+}
+.seatRow .col {
+  padding: 0px 5px;
+}
+
+.seatList {
+  width: 20px;
+  height: 20px;
+  border-radius: 25%;
+
+  cursor: pointer;
+  /* display: inline; */
+  margin: 0 5px;
+}
+
+.seatList:hover {
+  width: 25px;
+  height: 25px;
+}
+
+.seatList_available {
+  background-color: #d6d8e7;
+}
+
+.seatList_selected {
+  background-color: #5f2eea;
+}
+
+.seatList_sold {
+  background-color: #6e7191;
+}

@@ -41,7 +41,7 @@
 .nowShowing_nav {
   display: flex;
   justify-content: space-between;
-  padding-top: 60px;
+  padding-top: 30px;
   align-items: center;
 }
 .nowShowing_textShowing,
@@ -66,7 +66,59 @@
 .cardMovie {
   display: inline-block !important;
 }
+/* -------------------------------------------------------------------- */
+.secondSection {
+  height: 750px;
+}
+/* -------------------------------------------------------------------------- */
+.thirdSection {
+  height: 620px;
+}
+.join {
+  width: 70%;
+  height: 260px;
+  box-shadow: 0px 13px 62px 0px rgba(186, 186, 186, 0.3);
+  margin-top: 20px;
+  padding-top: 30px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  margin: 30px auto 0px auto;
+}
+.joinText {
+  margin-bottom: 20px;
+}
+.joinText > h2 {
+  color: rgba(95, 46, 234, 1);
+}
+.joinInput {
+  margin-bottom: 30px;
+}
+.joinInput input {
+  border-radius: 5px;
+  border: 2px solid #dedede;
+  border-color: rgba(222, 222, 222, 1);
+  background: #fcfdfe;
+  padding: 6px 30px;
+}
+.joinInput button {
+  padding: 10px 10px;
+  background-color: rgba(95, 46, 234, 1);
+  color: white;
+  border-color: white;
+}
 
+.join footer {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  color: rgba(110, 113, 145, 1);
+}
+
+.scheduleContainer {
+  display: flex;
+  justify-content: center;
+}
 @media (max-width: 376px) {
   .articleContainer {
     display: block;
@@ -102,5 +154,19 @@
   }
   .nowShowing_textShowing {
     font-size: 20px;
+  }
+
+  .join {
+    width: 100%;
+  }
+  .joinInput {
+    display: flex;
+    flex-direction: column;
+  }
+  .joinInput input {
+    text-align: center;
+  }
+  .scheduleContainer {
+    display: block;
   }
 }

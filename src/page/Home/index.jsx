@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "../../utils/axios";
 import Navbar from "../../components/Navbar/index";
 import CardMovie from "../../components/Card/cardNowShowing";
+import CardUpcoming from "../../components/Card/cardUpcoming";
+import Month from "../../components/Month/index";
+import Footer from "../../components/Footer";
 import styles from "./Home.module.css";
 import banner from "../../assets/Group 14.jpg";
 import { Link } from "react-router-dom";
@@ -11,6 +15,7 @@ function Home() {
   const [data, setData] = useState([]);
   const [pageInfo, setPageInfo] = useState({});
 
+  const navigate = useNavigate();
   useEffect(() => {
     getdataMovie();
   }, []);
@@ -28,7 +33,7 @@ function Home() {
     }
   };
   const handleDetail = (id) => {
-    console.log(id);
+    navigate(`/movieDetails/${id}`);
   };
   return (
     <div>
@@ -49,7 +54,7 @@ function Home() {
       <div className={styles.firstSection}>
         <section className={`container`}>
           <div className={styles.nowShowing_nav}>
-            <Link to="basic/router" className={styles.nowShowing_textShowing}>
+            <Link to="" className={styles.nowShowing_textShowing}>
               Now Showing
             </Link>
             <Link to="" className={styles.nowShowing_textView}>
@@ -64,6 +69,47 @@ function Home() {
             ))}
           </div>
         </section>
+      </div>
+      <div className={styles.secondSection}>
+        <section className={`container`}>
+          <div className={styles.nowShowing_nav}>
+            <Link to="" className={styles.nowShowing_textShowing}>
+              Upcoming Movie
+            </Link>
+            <Link to="" className={styles.nowShowing_textView}>
+              View All
+            </Link>
+          </div>
+          <Month />
+          <div className={styles.containerCard}>
+            {data.map((item) => (
+              <div className={styles.cardMovie} key={item.id}>
+                <CardUpcoming data={item} handleDetail={handleDetail} />
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+      <div className={styles.thirdSection}>
+        <section className={`container`}>
+          <div class={styles.join}>
+            <div class={styles.joinText}>
+              <span>Be the vanguard of the</span>
+              <h2>Moviegoers</h2>
+            </div>
+            <div class={styles.joinInput}>
+              <input type="email" placeholder="type your email" />
+              <button type="button" class="btn btn-outline-primary" id="button">
+                Join Now
+              </button>
+            </div>
+            <footer>
+              <span> By joining you as a Tickitz member, </span>
+              <span>we will always send you the latest updates via email .</span>
+            </footer>
+          </div>
+        </section>
+        <Footer />
       </div>
     </div>
   );
