@@ -1,0 +1,96 @@
+.section {
+  background-color: #f5f6f8;
+}
+
+.mainPage {
+  display: flex;
+}
+
+.movieSeat {
+  flex: 3;
+  margin-top: 50px;
+}
+.movieSelect {
+  background-color: #fff;
+  height: 400px;
+  margin: 10px;
+  padding: 25px;
+}
+
+.movieSelect hr {
+  margin-bottom: 30px;
+}
+
+.paymentDate,
+.paymentMovie,
+.paymentCinema,
+.paymentTicket,
+.paymentTotal {
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  color: rgba(107, 107, 107, 1);
+  margin: 10px 5px 0px 5px;
+}
+.seatSelect {
+  background: white;
+  margin: 10px;
+  height: 400px;
+}
+.seatSelect img {
+  cursor: pointer;
+}
+
+.paymentMethod {
+  border-radius: 8px;
+  justify-content: center;
+  border: 1px solid rgba(222, 222, 222, 1);
+  text-align: center;
+  padding: 5px 3px;
+  margin: 50px 20px;
+  display: flex;
+}
+.payVia::after {
+  content: " See how it works";
+  color: rgba(95, 46, 234, 1);
+  margin-left: 10px;
+}
+
+.orderInfo {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.orderInfo_details {
+  display: flex;
+  flex-direction: column;
+  height: 280px;
+  background-color: #fff;
+  margin: 10px;
+  /* justify-content: center; */
+}
+
+.orderInfo_text div {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  color: rgba(107, 107, 107, 1);
+  margin: 5px;
+}
+.movieTotal_payment {
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0px;
+}
+.containerButton {
+  display: flex;
+  justify-content: space-between;
+  width: 950px;
+  height: 70px;
+  margin: 40px 0px 20px 10px;
+}
+
+.containerButton button {
+  padding: 10px 150px;
+}

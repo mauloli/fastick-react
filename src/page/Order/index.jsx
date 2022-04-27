@@ -1,18 +1,23 @@
 import React, { useState } from "react";
 import Navbar from "../../components/Navbar/index";
+import { useNavigate } from "react-router-dom";
 import styles from "./Order.module.css";
 import Seat from "../../components/Seat";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Footer from "../../components/Footer";
 function Order() {
   const seatList = ["A", "B", "C", "D", "E", "F", "G"];
   const [selectedSeat, setSelectedSeat] = useState([]);
   const [reservedSeat, setReservedSeat] = useState(["A1", "C2", "B11"]);
   const { state } = useLocation();
+  const navigate = useNavigate();
+
   console.log(state);
+  const { dataOrder, dataMovie } = state;
+  // console.log(dataMovie);
 
   const handleSelectSeat = (seat) => {
-    console.log(seat);
+    // console.log(seat);
     if (selectedSeat.includes(seat)) {
       const deleteSeat = selectedSeat.filter((el) => {
         return el !== seat;
@@ -22,6 +27,12 @@ function Order() {
       setSelectedSeat([...selectedSeat, seat]);
     }
   };
+  console.log(selectedSeat.length);
+
+  const handleClick = () => {
+    navigate("/payment", { state: { seatDetails: selectedSeat, ...state } });
+  };
+
   return (
     <div>
       <Navbar />
@@ -31,16 +42,16 @@ function Order() {
             <div className="movie-select__main mb-5">
               <span style={{ fontWeight: "bold", margin: "10px" }}>Movie Select</span>
               <div className={styles.movieSelect}>
-                <span style={{ fontWeight: "bold" }}>Spider-Man: Home coming</span>
+                <span style={{ fontWeight: "bold" }}>{dataMovie.name}</span>
                 <div className="button-select">
                   <button
                     className="btn btn-sm btn-outline-secondary"
                     id="button__nav"
                     type="button"
                     style={{
-                      backgroundColor: "rgba(239, 240, 246, 1);",
-                      color: "rgba(95, 46, 234, 1);",
-                      borderColor: "rgba(95, 46, 234, 1);"
+                      backgroundColor: "rgba(239, 240, 246, 1)",
+                      color: "rgba(95, 46, 234, 1)",
+                      borderColor: "rgba(95, 46, 234, 1)"
                     }}
                   >
                     Chage Movie
@@ -69,8 +80,8 @@ function Order() {
                       style={{ paddingTop: "5px", margin: "30px 100px" }}
                     />
                   </div>
-                  {seatList.map((item) => (
-                    <div>
+                  {seatList.map((item, index) => (
+                    <div key={index}>
                       <Seat
                         rowSeat={item}
                         selectedSeat={handleSelectSeat}
@@ -93,7 +104,7 @@ function Order() {
                       borderColor: "rgba(95, 46, 234, 1)"
                     }}
                   >
-                    Chage Movie
+                    Change Movie
                   </button>
                 </div>
 
@@ -107,13 +118,9 @@ function Order() {
                       color: "rgba(95, 46, 234, 1)",
                       borderColor: "rgba(95, 46, 234, 1)"
                     }}
+                    onClick={handleClick}
                   >
-                    <a
-                      href="./payment.html"
-                      style={{ textDecoration: "none", color: "rgba(95, 46, 234, 1)" }}
-                    >
-                      Checkout Now
-                    </a>
+                    Checkout Now
                   </button>
                 </div>
               </div>
@@ -130,13 +137,38 @@ function Order() {
                 <span style={{ display: "block", fontSize: "20px" }}>CineOne 21 Cinema</span>
               </div>
               <div className="mt-3">
-                <div className={`container ${styles.movieSelected}`}>movie selected</div>
-                <div className={`container ${styles.movieDated}`}>Tuesday, 07 July 2020</div>
-                <div className={`container ${styles.moviePriced}`}>One ticket price</div>
-                <div className={`container ${styles.movieSeated}`}>Seat choosed</div>
+                <div className={`container ${styles.movieSelected}`}>
+                  <span>Movie Selected</span>
+                  <span style={{ fontSize: "14px", color: "black", fontWeight: "bold" }}>
+                    {dataMovie.name}
+                  </span>
+                </div>
+                <div className={`container ${styles.movieDated}`}>
+                  <span>{dataOrder.dateBooking}</span>
+                  <span style={{ fontSize: "14px", color: "black", fontWeight: "bold" }}>
+                    {dataOrder.timeBooking}
+                  </span>
+                </div>
+                <div className={`container ${styles.moviePriced}`}>
+                  <span>One ticket price</span>
+                  <span style={{ fontSize: "14px", color: "black", fontWeight: "bold" }}>
+                    {dataOrder.price}
+                  </span>
+                </div>
+                <div className={`container ${styles.movieSeated}`}>
+                  <span>Seat choosed</span>
+                  <span style={{ fontSize: "14px", color: "black", fontWeight: "bold" }}>
+                    {selectedSeat.map((item) => ` ${item},`)}
+                  </span>
+                </div>
               </div>
               <hr />
-              <div className={`${styles.movieTotalPayment}`}>Total Payment</div>
+              <div className={`${styles.movieTotalPayment}`}>
+                <span>Total Payment</span>
+                <span style={{ fontWeight: "700", color: "rgba(95, 46, 234, 1)" }}>
+                  {dataOrder.price * selectedSeat.length}
+                </span>
+              </div>
             </div>
           </div>
         </section>

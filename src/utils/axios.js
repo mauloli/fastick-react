@@ -26,6 +26,11 @@ axiosApiIntances.interceptors.response.use(
     return response;
   },
   function (error) {
+    if (error.response.status === 403) {
+      alert(error.response.data.msg);
+      localStorage.clear();
+      window.location.href("/login");
+    }
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
     return Promise.reject(error);

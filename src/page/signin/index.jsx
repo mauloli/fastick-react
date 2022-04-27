@@ -18,24 +18,32 @@ function SignIn() {
   const handleSubmit = async (event) => {
     try {
       event.preventDefault();
-      const resultLogin = await axios.post("auth/login", form);
+      const resultLogin = await axios.post("auth/login", form, Headers);
+
       setMessage(resultLogin.data.msg);
       localStorage.setItem("token", resultLogin.data.data.token);
       localStorage.setItem("refreshToken", resultLogin.data.data.refreshToken);
       const resultUser = await axios.get(`user/${resultLogin.data.data.id}`);
+      const dataUser = resultUser.data.data;
+      localStorage.setItem("dataUser", JSON.stringify(dataUser));
       setMessage(resultLogin.data.msg);
       setIsError(false);
-      console.log(resultUser);
+      console.log(dataUser);
 
       localStorage.setItem("token", resultLogin.data.data.token);
       localStorage.setItem("refreshToken", resultLogin.data.data.refreshToken);
 
-      // navigate("/");
+      navigate("/");
     } catch (error) {
       console.log(error.response);
 
       setMessage(error.response.data.msg);
       setIsError(true);
+    }
+  };
+  const handleEnter = (e) => {
+    if (e.key === "Enter") {
+      handleSubmit(e);
     }
   };
   return (
@@ -64,7 +72,7 @@ function SignIn() {
               Sign in with your data that you entered during your registration. email and password
               musth be correct!
             </p>
-            <div className={styles.form_input}>
+            <div className={styles.form_input} onKeyDown={handleEnter}>
               <span className={`${styles.span_email}`}>Email</span>
               <input
                 type="email"

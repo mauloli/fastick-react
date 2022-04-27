@@ -158,13 +158,23 @@
 
   .join {
     width: 100%;
+    height: 350px;
+    margin-bottom: 100px;
+  }
+  .join footer {
+    margin-top: 30px;
   }
   .joinInput {
     display: flex;
     flex-direction: column;
+    width: 300px;
+    margin: 10px 20px;
   }
   .joinInput input {
     text-align: center;
+  }
+  .joinInput button {
+    margin-top: 10px;
   }
   .scheduleContainer {
     display: block;

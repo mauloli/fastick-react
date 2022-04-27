@@ -40,8 +40,8 @@ function Seat(props) {
 
         <div className="col"></div>
 
-        {rightSeat.map((item) => (
-          <div className={`col ${styles.seatList_container}`}>
+        {rightSeat.map((item, index) => (
+          <div className={`col ${styles.seatList_container}`} key={index}>
             <div
               className={`${styles.seatList} ${
                 reserved.includes(item)

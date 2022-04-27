@@ -4,13 +4,18 @@ import styles from "./MovieDetails.module.css";
 import Navbar from "../../components/Navbar/";
 import Schedule from "../../components/Schedule";
 import Footer from "../../components/Footer";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 function MovieDetails(props) {
   const { id } = useParams();
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
   const [dataSchedule, setSchedule] = useState([]);
   let { releaseDate } = data;
+  const [dataOrder, setDataOrder] = useState({
+    movieId: id,
+    dateBooking: new Date().toISOString().split("T")[0]
+  });
+  const navigate = useNavigate();
 
   const getdataMovie = async () => {
     try {
@@ -19,6 +24,7 @@ function MovieDetails(props) {
       const resultSchedule = await axios.get(
         `schedule/?page=1&limit=10&searchMovieid=${id}&searchLocation=&sortSchedule=id `
       );
+      // console.log(resultSchedule.data.data);
 
       setData(resultMovie.data.data[0]);
       setSchedule(resultSchedule.data.data);
@@ -31,6 +37,17 @@ function MovieDetails(props) {
     getdataMovie();
   }, []);
 
+  console.log(dataOrder);
+
+  const changeDataBooking = (data) => {
+    console.log(data);
+    setDataOrder({ ...dataOrder, ...data });
+  };
+  const handleBooking = (dataSeat) => {
+    console.log(dataSeat);
+    setDataOrder({ ...dataOrder, dataMovie: data });
+    navigate("/order", { state: { dataOrder: dataOrder, dataMovie: data } });
+  };
   return (
     <div>
       <Navbar />
@@ -83,15 +100,20 @@ function MovieDetails(props) {
             <div>
               <input type="date" name="" id="" className={styles.input} />
               <select name="" id="map-marker" className={styles.select}>
-                <option value="fa-map-marker">&#xf041;&nbsp;&nbsp; Tangerang</option>
+                <option value="fa-map-marker">Tangerang</option>
               </select>
             </div>
           </header>
         </div>
         <div className={styles.scheduleContainer}>
           {dataSchedule.map((item, index) => (
-            <div key={index} style={{ display: "inline-block", textAlign: "center" }}>
-              <Schedule schedule={item} />
+            <div key={item.id} style={{ display: "inline-block", textAlign: "center" }}>
+              <Schedule
+                schedule={item}
+                handleBooking={handleBooking}
+                changeDataBooking={changeDataBooking}
+                dataOrder={dataOrder}
+              />
             </div>
           ))}
         </div>

@@ -63,36 +63,36 @@
   justify-content: space-around;
   /* margin-top: 0px; */
 }
-.movieTotalPayment::after {
+/* .movieTotalPayment::after {
   content: "$30";
   font-weight: 700;
   color: rgba(95, 46, 234, 1);
-}
-.movieSelected::after {
+} */
+/* .movieSelected::after {
   content: "spiderman home coming";
   font-size: 14px;
   color: black;
   font-weight: 600;
-}
+} */
 
-.movieDated::after {
+/* .movieDated::after {
   content: "02:00";
   font-size: 14px;
   color: black;
   font-weight: 600;
-}
-.moviePriced::after {
+} */
+/* .moviePriced::after {
   content: "$10";
   font-size: 14px;
   color: black;
   font-weight: 600;
-}
-.movieSeated::after {
+} */
+/* .movieSeated::after {
   content: "C4, C5, C6";
   font-size: 14px;
   color: black;
   font-weight: 600;
-}
+} */
 .containerButton {
   display: flex;
   justify-content: space-between;
