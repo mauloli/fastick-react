@@ -7,6 +7,7 @@ import Home from "./page/Home";
 import MovieDetails from "./page/MovieDetails";
 import Order from "./page/Order";
 import Payment from "./page/Payment";
+import ViewAll from "./page/ViewAll";
 function App() {
   return (
     <BrowserRouter>
@@ -19,6 +20,7 @@ function App() {
         <Route path="basic/login" element={<BasicLogin />} />
         <Route path="/order" element={<Order />} />
         <Route path="/payment" element={<Payment />} />
+        <Route path="/viewAll" element={<ViewAll />} />
       </Routes>
     </BrowserRouter>
   );

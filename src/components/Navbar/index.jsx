@@ -2,23 +2,27 @@ import React from "react";
 import styles from "./Navbar.module.css";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import logo from "../../assets/logo.png";
+import { Link, useNavigate } from "react-router-dom";
 
 function NavbarPage() {
   const token = localStorage.getItem("token");
+  const navigate = useNavigate();
   return (
     <div>
       <Navbar bg="white" expand="lg" className={styles.navbarContainer}>
         <Container>
-          <Navbar.Brand href="#home">
-            <img src={logo} alt="" className={styles.imgLogo} />
+          <Navbar.Brand>
+            <img src={logo} alt="" className={styles.imgLogo} onClick={() => navigate("/")} />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className={`me-auto ${styles.navbarList}`}>
               <Nav.Link href="/login" className={styles.navbarList_text}>
-                Home
+                <Link to="/" style={{ textDecoration: "none", color: "black" }}>
+                  Home
+                </Link>
               </Nav.Link>
-              <Nav.Link href="#link" className={styles.navbarList_text}>
+              <Nav.Link href="#nowShowing" className={styles.navbarList_text}>
                 Movie List
               </Nav.Link>
             </Nav>

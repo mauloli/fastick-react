@@ -52,4 +52,10 @@
 .buttonCard button {
   padding: 2px 30px;
   background-color: #fff;
+  border-color: rgba(95, 46, 234, 1);
+  color: rgba(95, 46, 234, 1);
+}
+.buttonCard button:hover {
+  background-color: rgba(95, 46, 234, 1) !important;
+  border-color: rgba(95, 46, 234, 1);
 }

@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar/index";
 import { useNavigate } from "react-router-dom";
 import styles from "./Order.module.css";
 import Seat from "../../components/Seat";
 import { Link, useLocation } from "react-router-dom";
 import Footer from "../../components/Footer";
+import axios from "../../utils/axios";
 function Order() {
   const seatList = ["A", "B", "C", "D", "E", "F", "G"];
   const [selectedSeat, setSelectedSeat] = useState([]);
-  const [reservedSeat, setReservedSeat] = useState(["A1", "C2", "B11"]);
+  const [reservedSeat, setReservedSeat] = useState([]);
   const { state } = useLocation();
   const navigate = useNavigate();
 
@@ -31,6 +32,23 @@ function Order() {
 
   const handleClick = () => {
     navigate("/payment", { state: { seatDetails: selectedSeat, ...state } });
+  };
+  useEffect(() => {
+    getBookingByUserId();
+  }, []);
+  const getBookingByUserId = async () => {
+    try {
+      const dataUser = JSON.parse(localStorage.getItem("dataUser"));
+      const result = await axios.get(
+        `/booking/?scheduleId=${dataOrder.scheduleId}&dateBooking=${dataOrder.dateBooking}&timeBooking=${dataOrder.timeBooking}`
+      );
+      const seat = result.data.data;
+      console.log(seat);
+
+      setReservedSeat(seat);
+    } catch (error) {
+      console.log(error.response);
+    }
   };
 
   return (

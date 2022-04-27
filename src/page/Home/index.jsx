@@ -51,13 +51,13 @@ function Home() {
           </div>
         </article>
       </div>
-      <div className={styles.firstSection}>
+      <div className={styles.firstSection} id="nowShowing">
         <section className={`container`}>
           <div className={styles.nowShowing_nav}>
             <Link to="" className={styles.nowShowing_textShowing}>
               Now Showing
             </Link>
-            <Link to="" className={styles.nowShowing_textView}>
+            <Link to="/viewAll" className={styles.nowShowing_textView}>
               View All
             </Link>
           </div>
@@ -76,7 +76,7 @@ function Home() {
             <Link to="" className={styles.nowShowing_textShowing}>
               Upcoming Movie
             </Link>
-            <Link to="" className={styles.nowShowing_textView}>
+            <Link to="/viewAll" className={styles.nowShowing_textView}>
               View All
             </Link>
           </div>

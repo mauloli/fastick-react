@@ -15,14 +15,18 @@ function MovieDetails(props) {
     movieId: id,
     dateBooking: new Date().toISOString().split("T")[0]
   });
+  console.log(dataOrder);
+
+  const [location, setLocation] = useState("");
   const navigate = useNavigate();
+  console.log(location);
 
   const getdataMovie = async () => {
     try {
       console.log("GET DATA MOVIE");
       const resultMovie = await axios.get(`movie/${id}`);
       const resultSchedule = await axios.get(
-        `schedule/?page=1&limit=10&searchMovieid=${id}&searchLocation=&sortSchedule=id `
+        `schedule/?page=1&limit=10&searchMovieid=${id}&searchLocation=${location}&sortSchedule=id `
       );
       // console.log(resultSchedule.data.data);
 
@@ -35,9 +39,7 @@ function MovieDetails(props) {
 
   useEffect(() => {
     getdataMovie();
-  }, []);
-
-  console.log(dataOrder);
+  }, [location]);
 
   const changeDataBooking = (data) => {
     console.log(data);
@@ -48,6 +50,7 @@ function MovieDetails(props) {
     setDataOrder({ ...dataOrder, dataMovie: data });
     navigate("/order", { state: { dataOrder: dataOrder, dataMovie: data } });
   };
+
   return (
     <div>
       <Navbar />
@@ -70,7 +73,7 @@ function MovieDetails(props) {
               <div className={`${styles.articleText_details}`}>
                 <div className={styles.detailsDate_duration}>
                   <span className={styles.spanRelease}>relase date</span>
-                  <span>{releaseDate}</span>
+                  <span>{releaseDate ? releaseDate.split("T")[0] : ""}</span>
                   <span className={styles.spanDuration}>duration</span>
                   <span>{data.duration}</span>
                 </div>
@@ -98,9 +101,26 @@ function MovieDetails(props) {
               Show Time and Tickets
             </h1>
             <div>
-              <input type="date" name="" id="" className={styles.input} />
-              <select name="" id="map-marker" className={styles.select}>
-                <option value="fa-map-marker">Tangerang</option>
+              <input
+                type="date"
+                name=""
+                id=""
+                className={styles.input}
+                min={new Date().toISOString().split("T")[0]}
+                max="2022-04-30"
+                onChange={(e) => setDataOrder({ ...dataOrder, dateBooking: e.target.value })}
+              />
+              <select
+                name=""
+                id="map-marker"
+                className={styles.select}
+                onChange={(e) => setLocation(e.target.value)}
+              >
+                <option value="">All</option>
+                <option value="Tangerang">Tangerang</option>
+                <option value="Bontang">Bontang</option>
+                <option value="Bogor">Bogor</option>
+                <option value="Tasik">Tasik</option>
               </select>
             </div>
           </header>
