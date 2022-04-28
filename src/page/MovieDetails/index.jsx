@@ -7,6 +7,7 @@ import Footer from "../../components/Footer";
 import { useParams, useNavigate } from "react-router-dom";
 function MovieDetails(props) {
   const { id } = useParams();
+  const cloudinaryImg = process.env.REACT_APP_CLOUDINARY_RES;
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
   const [dataSchedule, setSchedule] = useState([]);
@@ -58,10 +59,7 @@ function MovieDetails(props) {
         <div className={`row ${styles.articleMain}`}>
           <div className={`col-4 ${styles.articleMain_img}`}>
             <div className={`${styles.articleImage}`}>
-              <img
-                src={`https://res.cloudinary.com/dfoi1ro2a/image/upload/v1649233762/${data.image}`}
-                alt=""
-              />
+              <img src={`${cloudinaryImg}${data.image}`} alt="" />
             </div>
           </div>
           <div className={`col-8 ${styles.articleMain_text}`}>

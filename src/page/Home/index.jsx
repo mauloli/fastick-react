@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+
 import { useNavigate } from "react-router-dom";
 import axios from "../../utils/axios";
 import Navbar from "../../components/Navbar/index";
@@ -14,6 +15,7 @@ function Home() {
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
   const [pageInfo, setPageInfo] = useState({});
+  console.log(process.env.REACT_BASE_URL);
 
   const navigate = useNavigate();
   useEffect(() => {

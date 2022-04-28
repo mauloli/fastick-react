@@ -1,7 +1,6 @@
 import axios from "axios";
-
 const axiosApiIntances = axios.create({
-  baseURL: "https://project-fastick.herokuapp.com/"
+  baseURL: process.env.REACT_APP_BASE_URL
 });
 // Add a request interceptor
 axiosApiIntances.interceptors.request.use(
