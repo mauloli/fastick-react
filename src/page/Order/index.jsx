@@ -71,6 +71,7 @@ function Order() {
                       color: "rgba(95, 46, 234, 1)",
                       borderColor: "rgba(95, 46, 234, 1)"
                     }}
+                    onClick={() => navigate("/")}
                   >
                     Chage Movie
                   </button>
@@ -121,6 +122,7 @@ function Order() {
                       color: "rgba(95, 46, 234, 1)",
                       borderColor: "rgba(95, 46, 234, 1)"
                     }}
+                    onClick={() => navigate("/")}
                   >
                     Change Movie
                   </button>

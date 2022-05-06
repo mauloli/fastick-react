@@ -50,6 +50,9 @@
   margin: 50px 20px;
   display: flex;
 }
+.paymentMethod:hover {
+  box-shadow: 0px 13px 62px 0px rgba(186, 186, 186, 0.3);
+}
 .payVia::after {
   content: " See how it works";
   color: rgba(95, 46, 234, 1);

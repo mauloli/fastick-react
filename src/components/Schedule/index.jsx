@@ -4,8 +4,17 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 function Schedule(props) {
   const { premier, location, time, price, movieId, id } = props.schedule;
   const { dataOrder } = props;
+  const [timeOrder, setTimeOrder] = useState("");
   const timeSchedule = time.split(",");
-
+  const clickTime = (item, e) => {
+    props.changeDataBooking({
+      timeBooking: item,
+      scheduleId: id,
+      price: price,
+      premier: premier
+    });
+    setTimeOrder(item);
+  };
   return (
     <div className={styles.showTime}>
       <div className={styles.showTime_border}>
@@ -28,16 +37,15 @@ function Schedule(props) {
                 {timeSchedule.map((item) => (
                   <div className="col-sm-3 col-3 mt-1" key={item}>
                     <div
-                      className={styles.borderTime}
+                      className={`${
+                        dataOrder.scheduleId === id
+                          ? item === timeOrder
+                            ? styles.borderTime_active
+                            : styles.borderTime
+                          : styles.borderTime
+                      }`}
                       style={{ cursor: "pointer" }}
-                      onClick={() =>
-                        props.changeDataBooking({
-                          timeBooking: item,
-                          scheduleId: id,
-                          price: price,
-                          premier: premier
-                        })
-                      }
+                      onClick={(e) => clickTime(item, e)}
                     >
                       {item}
                     </div>

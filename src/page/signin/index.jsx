@@ -15,6 +15,8 @@ function SignIn() {
   const handleChangeForm = (event) => {
     setForm({ ...form, [event.target.name]: event.target.value });
   };
+  const [visible, setVisible] = useState(false);
+  console.log(visible);
   const handleSubmit = async (event) => {
     try {
       event.preventDefault();
@@ -82,9 +84,13 @@ function SignIn() {
                 onChange={handleChangeForm}
               />
               <span className={`${styles.span_password}`}>Password</span>
-              <i className={`bi bi-eye-slash ${styles.icon_eye}`} id="togglePassword"></i>
+              <i
+                className={`bi bi-eye-slash ${styles.icon_eye}`}
+                id="togglePassword"
+                onClick={() => setVisible(!visible)}
+              ></i>
               <input
-                type="password"
+                type={visible ? `text` : `password`}
                 name="password"
                 placeholder="Write Your Password"
                 className={`${styles.input}`}

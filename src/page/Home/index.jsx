@@ -10,12 +10,12 @@ import Footer from "../../components/Footer";
 import styles from "./Home.module.css";
 import banner from "../../assets/Group 14.jpg";
 import { Link } from "react-router-dom";
+import { Alert } from "react-bootstrap";
 function Home() {
   const limit = 6;
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
   const [pageInfo, setPageInfo] = useState({});
-  console.log(process.env.REACT_BASE_URL);
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -31,7 +31,11 @@ function Home() {
       setData(resultMovie.data.data);
       setPageInfo(resultMovie.data.pagination);
     } catch (error) {
-      console.log(error.response);
+      console.log(error.response.data);
+      if (error.response.data.stat === 403) {
+        alert("please login first!");
+        navigate("/login");
+      }
     }
   };
   const handleDetail = (id) => {

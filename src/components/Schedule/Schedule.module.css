@@ -46,6 +46,10 @@
   background-color: rgba(95, 46, 234, 1);
   color: white;
 }
+.borderTime_active {
+  background-color: rgba(95, 46, 234, 1);
+  color: white;
+}
 .borderPrice {
   display: flex;
   justify-content: space-between;

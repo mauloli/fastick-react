@@ -16,11 +16,13 @@ function MovieDetails(props) {
     movieId: id,
     dateBooking: new Date().toISOString().split("T")[0]
   });
-  console.log(dataOrder);
 
   const [location, setLocation] = useState("");
   const navigate = useNavigate();
-  console.log(location);
+
+  useEffect(() => {
+    getdataMovie();
+  }, [location]);
 
   const getdataMovie = async () => {
     try {
@@ -37,10 +39,6 @@ function MovieDetails(props) {
       console.log(error.response);
     }
   };
-
-  useEffect(() => {
-    getdataMovie();
-  }, [location]);
 
   const changeDataBooking = (data) => {
     console.log(data);

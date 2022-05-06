@@ -3,6 +3,7 @@
 .main {
   display: flex;
   box-sizing: border-box;
+  height: 100%;
 }
 
 .banner {
