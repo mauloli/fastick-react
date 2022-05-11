@@ -103,7 +103,6 @@ function MovieDetails(props) {
                 id=""
                 className={styles.input}
                 min={new Date().toISOString().split("T")[0]}
-                max="2022-04-30"
                 onChange={(e) => setDataOrder({ ...dataOrder, dateBooking: e.target.value })}
               />
               <select

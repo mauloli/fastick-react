@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { getMovie } from "../../stores/action/movie";
 import axios from "../../utils/axios";
 import Navbar from "../../components/Navbar/index";
 import CardMovie from "../../components/Card/cardNowShowing";
@@ -17,19 +18,22 @@ function Home() {
   const [data, setData] = useState([]);
   const [pageInfo, setPageInfo] = useState({});
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
     getdataMovie();
   }, []);
-
+  const movie = useSelector((state) => state.movie);
+  console.log(movie);
   const getdataMovie = async () => {
     try {
       console.log("GET DATA MOVIE");
 
-      const resultMovie = await axios.get(`movie?page=${page}&limit=${limit}`);
+      // const resultMovie = await axios.get(`movie?page=${page}&limit=${limit}`);
+      await dispatch(getMovie(page, limit));
 
-      setData(resultMovie.data.data);
-      setPageInfo(resultMovie.data.pagination);
+      // setData(resultMovie.data.data);
+      // setPageInfo(resultMovie.data.pagination);
     } catch (error) {
       console.log(error.response.data);
       if (error.response.data.stat === 403) {
@@ -68,7 +72,7 @@ function Home() {
             </Link>
           </div>
           <div className={styles.containerCard}>
-            {data.map((item) => (
+            {movie.data.map((item) => (
               <div className={styles.cardMovie} key={item.id}>
                 <CardMovie data={item} handleDetail={handleDetail} />
               </div>
@@ -88,7 +92,7 @@ function Home() {
           </div>
           <Month />
           <div className={styles.containerCard}>
-            {data.map((item) => (
+            {movie.data.map((item) => (
               <div className={styles.cardMovie} key={item.id}>
                 <CardUpcoming data={item} handleDetail={handleDetail} />
               </div>

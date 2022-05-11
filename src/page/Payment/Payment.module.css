@@ -97,3 +97,60 @@
 .containerButton button {
   padding: 10px 150px;
 }
+
+@media (max-width: 376px) {
+  .mainPage {
+    display: block;
+  }
+  .movieSeat {
+    margin-top: 0px;
+    padding-top: 30px;
+  }
+
+  .movieSelect {
+    height: 100px;
+  }
+  .movieSelect hr {
+    display: none;
+  }
+  .paymentDate,
+  .paymentMovie,
+  .paymentCinema,
+  .paymentTicket {
+    display: none;
+  }
+  .seatSelect {
+    height: 300px;
+  }
+  .paymentMethod img {
+    width: 40px;
+    height: 20px;
+    object-fit: contain;
+  }
+  .payVia {
+    flex-direction: column;
+    text-align: center;
+  }
+  .paymentMethod {
+    margin: 10px 5px;
+    width: 70px !important;
+  }
+
+  .imgHide {
+    display: none;
+  }
+  .containerButton {
+    display: block;
+    padding: 0px 0px;
+    width: 100%;
+    height: 50px;
+    padding-bottom: 100px;
+  }
+
+  .containerButton button {
+    padding: 10px 100px;
+  }
+  .buttonHide {
+    display: none;
+  }
+}

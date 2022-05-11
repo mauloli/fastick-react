@@ -11,3 +11,7 @@
   color: rgba(95, 46, 234, 1);
   border-color: rgba(95, 46, 234, 1);
 }
+.buttonContainer button:hover {
+  background-color: rgba(95, 46, 234, 1);
+  border-color: rgba(95, 46, 234, 1);
+}

@@ -1,0 +1,71 @@
+.section {
+  background-color: #f5f6f8;
+  height: 1300px;
+}
+.headerContent {
+  display: flex;
+  justify-content: space-between;
+}
+
+.headerText {
+  font-size: 24px;
+  font-weight: bold;
+}
+.headerForm {
+  margin-right: 20px;
+}
+.headerForm select,
+input {
+  border-radius: 10px;
+  border: 1px solid #dedede;
+  text-align: center;
+}
+.headerForm select {
+  width: 132px;
+  height: 40px;
+}
+.headerForm input {
+  width: 200px;
+  height: 40px;
+  margin-left: 30px;
+}
+
+.main {
+  height: 950px;
+  background-color: white;
+}
+.cardMovie {
+  display: inline-block;
+}
+.containerCard {
+  padding: 20px 20px;
+}
+
+.pagination ul {
+  justify-content: center;
+}
+
+@media (max-width: 376px) {
+  .section {
+    height: 900px;
+  }
+  .main {
+    height: 500px;
+  }
+  .headerContent {
+    flex-direction: column;
+  }
+  .headerForm {
+    display: flex;
+    margin-right: 0px;
+    margin-top: 20px;
+    justify-content: space-between;
+  }
+  .headerForm input {
+    margin-left: 0px;
+  }
+  .containerCard {
+    display: flex;
+    overflow-x: auto;
+  }
+}

@@ -47,7 +47,7 @@ function Payment() {
       <section className={styles.section}>
         <div className={`container ${styles.mainPage}`}>
           <div className={styles.movieSeat}>
-            <div className="movie-select__main mb-5">
+            <div className={`mb-5 ${styles.movieSelect_main}`}>
               <span style={{ fontWeight: "bold", margin: "10px" }}>Payment Info</span>
               <div className={styles.movieSelect}>
                 <div className={styles.paymentDate}>
@@ -185,7 +185,7 @@ function Payment() {
         </div>
         <div className="container">
           <div className={styles.containerButton}>
-            <div className="btn__hide">
+            <div className={styles.buttonHide}>
               <button
                 style={{
                   backgroundColor: "rgba(239, 240, 246, 1)",
