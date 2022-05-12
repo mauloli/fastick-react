@@ -2,7 +2,6 @@ import React from "react";
 import styles from "./Schedule.module.css";
 
 function Admin(props) {
-  console.log(props);
   const { premier, location, time, price } = props.schedule;
   const timeSchedule = time.split(",");
   return (
@@ -41,9 +40,12 @@ function Admin(props) {
                 <span>Price</span>
                 <span>{price}</span>
               </div>
-              <div className={`text-center mt-4 ${styles.borderButton}`}>
-                <button className="btn btn-sm btn-outline-secondary" id="button__nav" type="button">
-                  Book now
+              <div className={`text-center mt-4 ${styles.containerButton}`}>
+                <button className="btn btn-sm btn-outline-primary" id="button__nav" type="button">
+                  Update
+                </button>
+                <button className="btn btn-sm btn-outline-danger" id="button__nav" type="button">
+                  Delete{" "}
                 </button>
               </div>
             </div>

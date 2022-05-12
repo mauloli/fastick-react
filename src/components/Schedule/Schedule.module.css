@@ -59,7 +59,13 @@
   background-color: rgba(95, 46, 234, 1);
   color: white;
 }
-
+.containerButton {
+  display: flex;
+  justify-content: space-around;
+}
+.containerButton button {
+  width: 130px;
+}
 @media (max-width: 376px) {
   .showTime {
     width: 100%;
