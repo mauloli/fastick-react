@@ -1,0 +1,92 @@
+.formSchedule {
+  width: 100%;
+  height: 500px;
+  background-color: white;
+  display: flex;
+  padding-top: 30px;
+  margin-top: 30px;
+}
+.firstRow {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+.imageBorder {
+  width: 200px;
+  height: 280px;
+  border: 0.5px solid #dedede;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.secondRow,
+.thirdRow {
+  flex: 1.5;
+  display: flex;
+  flex-direction: column;
+}
+.selectMovie,
+.selectLocation,
+.inputPrice {
+  width: 400px;
+  height: 60px;
+  border-radius: 10px;
+  border: 1px solid #dedede;
+}
+.secondRow img {
+  width: 100px;
+  height: 30px;
+  object-fit: contain;
+  margin: 5px 12px;
+}
+.startEnd {
+  display: flex;
+}
+.start,
+.end {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.inputStart,
+.inputEnd {
+  width: 170px;
+  height: 35px;
+}
+.addIcon input {
+  width: 70px;
+  border-color: blueviolet;
+}
+.timeOrder {
+  display: inline-block;
+  margin: 10px 20px 10px 0px;
+}
+
+.containerButton {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* position: absolute;
+  bottom: 200px; */
+}
+.containerButton button {
+  margin-left: 20px;
+  width: 200px;
+  background-color: #fff;
+  color: #5f2eea;
+  border-color: #5f2eea;
+}
+.containerButton button:hover {
+  background-color: #5f2eea;
+}
+/* ----------------------------------------------------------------- */
+.dataSchedule {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  display: inline-block;
+  padding-top: 30px;
+  margin-top: 50px;
+}

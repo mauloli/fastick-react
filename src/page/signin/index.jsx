@@ -16,17 +16,16 @@ function SignIn() {
     setForm({ ...form, [event.target.name]: event.target.value });
   };
   const [visible, setVisible] = useState(false);
-  console.log(visible);
   const handleSubmit = async (event) => {
     try {
       event.preventDefault();
       const resultLogin = await axios.post("auth/login", form, Headers);
-
       setMessage(resultLogin.data.msg);
       localStorage.setItem("token", resultLogin.data.data.token);
       localStorage.setItem("refreshToken", resultLogin.data.data.refreshToken);
       const resultUser = await axios.get(`user/${resultLogin.data.data.id}`);
       const dataUser = resultUser.data.data;
+      console.log(dataUser);
       localStorage.setItem("dataUser", JSON.stringify(dataUser));
       setMessage(resultLogin.data.msg);
       setIsError(false);

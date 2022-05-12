@@ -8,6 +8,7 @@ import MovieDetails from "./page/MovieDetails";
 import Order from "./page/Order";
 import Payment from "./page/Payment";
 import ViewAll from "./page/ViewAll";
+import ManageSchedule from "./page/ManageSchedule";
 function App() {
   return (
     <BrowserRouter>
@@ -21,6 +22,7 @@ function App() {
         <Route path="/order" element={<Order />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/viewAll" element={<ViewAll />} />
+        <Route path="manageSchedule" element={<ManageSchedule />} />
       </Routes>
     </BrowserRouter>
   );

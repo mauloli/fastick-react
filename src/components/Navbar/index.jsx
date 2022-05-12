@@ -8,7 +8,7 @@ function NavbarPage() {
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const [isSearch, setIsSearch] = useState(false);
-
+  const { role } = JSON.parse(localStorage.getItem("dataUser"));
   return (
     <div>
       <Navbar bg="white" expand="lg" className={styles.navbarContainer}>
