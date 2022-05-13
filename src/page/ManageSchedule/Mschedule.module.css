@@ -95,7 +95,9 @@
   padding-top: 0px;
   margin-top: 0px;
 }
-
+.scheduleContainer {
+  margin: 0px 0px 0px 50px;
+}
 @media (max-width: 376px) {
   .formSchedule {
     display: block;

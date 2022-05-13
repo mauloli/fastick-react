@@ -12,6 +12,12 @@ export const getMovieName = (name) => {
     payload: axios.get(`movie?searchName=${name}`)
   };
 };
+export const getMovieId = (id) => {
+  return {
+    type: "GET_DATA_MOVIE",
+    payload: axios.get(`movie/${id}`)
+  };
+};
 export const postMovie = (form) => {
   return {
     type: "POST_MOVIE",

@@ -19,7 +19,7 @@ export const postSchedule = (form) => {
   };
 };
 
-export const updateSchedule = (id, form) => {
+export const patchSchedule = (id, form) => {
   return {
     type: "UPDATE_SCHEDULE",
     payload: axios.patch(`schedule/${id}`, form)

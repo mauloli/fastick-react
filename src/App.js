@@ -9,6 +9,7 @@ import Order from "./page/Order";
 import Payment from "./page/Payment";
 import ViewAll from "./page/ViewAll";
 import ManageSchedule from "./page/ManageSchedule";
+import ManageMovie from "./page/manageMovie";
 import { useSelector, useDispatch } from "react-redux";
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Route path="/payment" element={<Payment />} />
         <Route path="/viewAll" element={<ViewAll />} />
         <Route path="manageSchedule" element={<ManageSchedule />} />
+        <Route path="manageMovie" element={<ManageMovie />} />
       </Routes>
     </BrowserRouter>
   );

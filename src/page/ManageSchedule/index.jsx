@@ -6,7 +6,7 @@ import Schedule from "../../components/Schedule/admin";
 import Pagination from "react-paginate";
 import moviePoster from "../../assets/movie.JPG";
 import { useDispatch, useSelector } from "react-redux";
-import { getSchedule, postSchedule } from "../../stores/action/schedule";
+import { getSchedule, postSchedule, patchSchedule } from "../../stores/action/schedule";
 import { getMovie } from "../../stores/action/movie";
 import axios from "../../utils/axios";
 import { createSearchParams, useNavigate } from "react-router-dom";
@@ -16,21 +16,56 @@ function ManageSchedule() {
   const [dataSchedule, setDataSchedule] = useState({});
   const [page, setPage] = useState(1);
   const [image, setImage] = useState("");
+  const [updateSchedule, setUpdateSchedule] = useState(false);
   const location = ["Jakarta", "Tangerang", "Bogor", "Tasik", "Bontang"];
   const premier = ["ebuid", "hiflix", "cineone"];
   const cloudinaryImg = process.env.REACT_APP_CLOUDINARY_RES;
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const dataUser = JSON.parse(localStorage.getItem("dataUser"));
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(postSchedule(dataSchedule));
+    // dispatch(postSchedule(dataSchedule));
     console.log(dataSchedule);
+    // getDataSchedule();
+  };
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    await dispatch(patchSchedule(dataSchedule.id, dataSchedule));
+    handleReset(e);
     getDataSchedule();
+  };
+  const handleReset = (e) => {
+    e.preventDefault();
+    setDataSchedule({
+      id: "",
+      movieid: "",
+      price: "",
+      premier: "",
+      location: "",
+      dateStart: "",
+      dateEnd: "",
+      time: ""
+    });
+    setTime([]);
+    setUpdateSchedule(false);
   };
   const handleChange = (e) => {
     if (e.key === "Enter") {
       setTime([...time, e.target.value]);
+    }
+  };
+  const handeChangeForm = (e) => {
+    const { value, name } = e.target;
+    if (name == "movie") {
+      const allDataMovie = movie.data.find((item) => {
+        if (item.id == value) {
+          return true;
+        }
+      });
+      setDataSchedule({ ...dataSchedule, movieid: e.target.value });
+      setImage(allDataMovie.image);
+    } else {
+      setDataSchedule({ ...dataSchedule, [name]: value });
     }
   };
   const deleteTime = () => {
@@ -38,13 +73,13 @@ function ManageSchedule() {
     setDataSchedule({ ...dataSchedule, time: "" });
   };
 
-  const onSelectMovie = (e) => {
-    const image = e.target.value.split(",")[0];
-    const id = e.target.value.split(",")[1];
-    setImage(image);
-    setDataSchedule({ ...dataSchedule, movieid: id });
-    console.log(id);
-  };
+  // const onSelectMovie = (e) => {
+  //   const image = e.target.value.split(",")[0];
+  //   const id = e.target.value.split(",")[1];
+  //   setImage(image);
+  //   setDataSchedule({ ...dataSchedule, movieid: id });
+  //   console.log(id);
+  // };
   const handlePage = (data) => {
     setPage(data.selected + 1);
   };
@@ -65,7 +100,39 @@ function ManageSchedule() {
       console.log(error.response);
     }
   };
+  const selectedSchedule = async (id) => {
+    const allScheduleData = schedule.data.find((item) => {
+      if (item.id == id) {
+        return true;
+      }
+    });
 
+    let { movieid, price, premier, location, dateStart, dateEnd, time } = allScheduleData;
+    const dataMovie = movie.data.find((item) => {
+      if (item.id == movieid) {
+        return true;
+      }
+    });
+
+    setImage(dataMovie.image);
+    dateStart = dateStart.split("T")[0];
+    dateEnd = dateEnd.split("T")[0];
+    setDataSchedule({
+      ...dataSchedule,
+      id: allScheduleData.id,
+      movieid,
+      price,
+      premier,
+      location,
+      dateStart,
+      dateEnd,
+      time
+    });
+    time = time.split(",");
+    setTime(time);
+    setUpdateSchedule(!updateSchedule);
+  };
+  console.log(dataSchedule.location);
   return (
     <div style={{ backgroundColor: "#F5F6F8" }}>
       <Navbar />
@@ -81,14 +148,15 @@ function ManageSchedule() {
             <div className={`${styles.secondRow}`}>
               <span className={`mb-3`}>Movie</span>
               <select
-                onChange={(e) => onSelectMovie(e)}
-                name=""
+                value={dataSchedule.movieid}
+                onChange={(e) => handeChangeForm(e)}
+                name="movie"
                 id=""
                 className={`mb-3 ${styles.selectMovie}`}
               >
                 <option value=""> Select Movie</option>
                 {movie.data.map((item) => (
-                  <option value={[item.image, item.id]} key={item.id}>
+                  <option value={item.id} key={item.id}>
                     {item.name}
                   </option>
                 ))}
@@ -96,9 +164,11 @@ function ManageSchedule() {
               <span className={`mb-3`}>Price</span>
               <form action="">
                 <input
+                  value={dataSchedule.price}
                   type="text"
+                  name="price"
                   className={`mb-3 ${styles.inputPrice}`}
-                  onChange={(e) => setDataSchedule({ ...dataSchedule, price: e.target.value })}
+                  onChange={(e) => handeChangeForm(e)}
                 />
               </form>
               <span className={`mb-3`}> Premiere</span>
@@ -115,10 +185,11 @@ function ManageSchedule() {
             <div className={`${styles.thirdRow} container`}>
               <span className="mb-3">Location</span>
               <select
-                name=""
+                value={dataSchedule.location}
+                name="location"
                 id=""
                 className={`mb-3 ${styles.selectLocation}`}
-                onChange={(e) => setDataSchedule({ ...dataSchedule, location: e.target.value })}
+                onChange={(e) => handeChangeForm(e)}
               >
                 <option value=""> Select Location</option>
                 {location.map((item, index) => (
@@ -131,19 +202,21 @@ function ManageSchedule() {
                 <div className={styles.start}>
                   <span className="mb-3">Date Start</span>
                   <input
+                    value={dataSchedule.dateStart}
+                    name="dateStart"
                     type="date"
                     className={styles.inputStart}
-                    onChange={(e) =>
-                      setDataSchedule({ ...dataSchedule, dateStart: e.target.value })
-                    }
+                    onChange={(e) => handeChangeForm(e)}
                   />
                 </div>
                 <div className={styles.end}>
                   <span className="mb-3">Date End</span>
                   <input
+                    value={dataSchedule.dateEnd}
+                    name="dateEnd"
                     type="date"
                     className={styles.inputEnd}
-                    onChange={(e) => setDataSchedule({ ...dataSchedule, dateEnd: e.target.value })}
+                    onChange={(e) => handeChangeForm(e)}
                   />
                 </div>
               </div>
@@ -167,6 +240,7 @@ function ManageSchedule() {
               </div>
               <div className="d-flex justify-content-xl-around">
                 <button
+                  name="time"
                   className="btn btn-sm btn-outline-primary"
                   onClick={() => setDataSchedule({ ...dataSchedule, time: time.toString() })}
                 >
@@ -177,9 +251,17 @@ function ManageSchedule() {
                 </button>
               </div>
               <div className={styles.containerButton}>
-                <form action="" onSubmit={handleSubmit}>
-                  <button className={`btn btn-primary`}>Reset</button>
-                  <button className={`btn btn-primary`}>Submit</button>
+                <form
+                  action=""
+                  onSubmit={updateSchedule ? handleUpdate : handleSubmit}
+                  onReset={handleReset}
+                >
+                  <button className={`btn btn-primary`} type="reset">
+                    Reset
+                  </button>
+                  <button className={`btn btn-primary`} type="submit">
+                    {`${updateSchedule ? "Update" : "Submit"}`}
+                  </button>
                 </form>
               </div>
             </div>
@@ -192,8 +274,16 @@ function ManageSchedule() {
           <h3 className="mt-3">Data Schedule</h3>
           <div className={`${styles.dataSchedule}`}>
             {schedule.data.map((item, index) => (
-              <div key={index} style={{ display: "inline-block", textAlign: "center" }}>
-                <Schedule schedule={item} />
+              <div
+                className={styles.scheduleContainer}
+                key={index}
+                style={{ display: "inline-block", textAlign: "center" }}
+              >
+                <Schedule
+                  schedule={item}
+                  selectedSchedule={selectedSchedule}
+                  updateStatus={updateSchedule}
+                />
               </div>
             ))}
           </div>

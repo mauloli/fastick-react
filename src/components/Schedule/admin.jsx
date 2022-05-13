@@ -3,6 +3,7 @@ import styles from "./Schedule.module.css";
 
 function Admin(props) {
   const { premier, location, time, price } = props.schedule;
+
   const timeSchedule = time.split(",");
   return (
     <div className={styles.showTime}>
@@ -41,8 +42,13 @@ function Admin(props) {
                 <span>{price}</span>
               </div>
               <div className={`text-center mt-4 ${styles.containerButton}`}>
-                <button className="btn btn-sm btn-outline-primary" id="button__nav" type="button">
-                  Update
+                <button
+                  className="btn btn-sm btn-outline-primary"
+                  id="button__nav"
+                  type="button"
+                  onClick={() => props.selectedSchedule(props.schedule.id)}
+                >
+                  {`${props.updateStatus ? "Cancel" : "Update"}`}
                 </button>
                 <button className="btn btn-sm btn-outline-danger" id="button__nav" type="button">
                   Delete{" "}
