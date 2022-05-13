@@ -1,0 +1,102 @@
+.formMovie {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  padding-top: 30px;
+  margin-top: 30px;
+}
+.firstColumn {
+  display: flex;
+  flex: 3;
+}
+.secondColumn {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin: 5px 80px;
+}
+
+.containerButton {
+  display: flex;
+  justify-content: end;
+}
+.firstRow {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+.secondRow,
+.thirdRow {
+  flex: 1.5;
+  display: flex;
+  flex-direction: column;
+}
+.inputName,
+.inputDirector,
+.inputReleaseDate,
+.inputCategory,
+.inputCast {
+  width: 400px;
+  height: 60px;
+  border-radius: 10px;
+  border: 1px solid #dedede;
+}
+.inputHour,
+.inputMinute {
+  height: 60px;
+  width: 160px;
+}
+.inputFile {
+  width: 102px;
+  border-radius: 0px;
+}
+.inputFileHide {
+  display: none;
+}
+.imageBorder {
+  width: 250px;
+  height: 280px;
+  border: 0.5px solid #dedede;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.imageMovie {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+}
+.durationContainer {
+  display: flex;
+}
+.inputSynopsis {
+  height: 80px;
+}
+.containerButton button {
+  height: 40px;
+  margin-left: 30px;
+  width: 160px;
+}
+.buttonSubmit {
+  border-color: #5f2eea;
+  color: #5f2eea;
+}
+.buttonSubmit:hover {
+  background-color: #5f2eea;
+  color: white;
+  border-color: #5f2eea;
+}
+/* --------------------------------------------------------------- */
+.dataMovie {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  padding-top: 0px;
+  margin-top: 0px;
+}
+.movieContainer {
+  margin: 30px 0px 30px 80px;
+}

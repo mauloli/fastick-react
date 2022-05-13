@@ -25,7 +25,7 @@ export const postMovie = (form) => {
   };
 };
 
-export const updateMovie = (id, form) => {
+export const patchMovie = (id, form) => {
   return {
     type: "UPDATE_MOVIE",
     payload: axios.patch(`movie/${id}`, form)

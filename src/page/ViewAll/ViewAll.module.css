@@ -31,11 +31,12 @@ input {
 }
 
 .main {
-  height: 950px;
+  height: 1000px;
   background-color: white;
 }
 .cardMovie {
   display: inline-block;
+  margin: 20px 40px;
 }
 .containerCard {
   padding: 20px 20px;

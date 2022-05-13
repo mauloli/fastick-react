@@ -13,7 +13,7 @@ import banner from "../../assets/Group 14.jpg";
 import { Link } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 function Home() {
-  const limit = 6;
+  const limit = 10;
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
   const [pageInfo, setPageInfo] = useState({});

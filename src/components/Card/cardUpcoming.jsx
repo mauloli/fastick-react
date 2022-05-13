@@ -4,7 +4,6 @@ import styles from "./Card.module.css";
 
 function index(props) {
   const { name, category, id, image } = props.data;
-
   return (
     <div>
       <div className={styles.cardContainer}>
@@ -17,15 +16,34 @@ function index(props) {
             <div className={styles.cardUpcoming}>
               <Card.Text className={`${styles.cardTextTittle}`}>{name}</Card.Text>
               <Card.Text className={`${styles.cardTextCat}`}>{category}</Card.Text>
-              <div className={styles.buttonCard}>
-                <button
-                  type="button"
-                  class="btn btn-outline-primary"
-                  onClick={() => props.handleDetail(id)}
-                >
-                  Details
-                </button>
-              </div>
+              {props.handleUpdate !== undefined ? (
+                <div className={styles.buttonCardUpdate}>
+                  <button
+                    type="button"
+                    className={`btn btn-outline-primary ${styles.buttonUpdate}`}
+                    onClick={() => props.handleUpdate(id)}
+                  >
+                    {props.statusUpdate ? `Cancel` : `Update`}
+                  </button>
+                  <button
+                    type="button"
+                    className={`btn btn-outline-danger ${styles.buttonDelete}`}
+                    onClick={() => props.handleDetail(id)}
+                  >
+                    Delete
+                  </button>
+                </div>
+              ) : (
+                <div className={styles.buttonCard}>
+                  <button
+                    type="button"
+                    className="btn btn-outline-primary"
+                    onClick={() => props.handleDetail(id)}
+                  >
+                    Details
+                  </button>
+                </div>
+              )}
             </div>
           </Card.Body>
         </Card>
