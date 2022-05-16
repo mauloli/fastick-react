@@ -1,6 +1,6 @@
 import axios from "axios";
 const axiosApiIntances = axios.create({
-  baseURL: process.env.REACT_APP_BASE_URL || 'https://project-fastick.herokuapp.com/'
+  baseURL: process.env.REACT_APP_BASE_URL || "https://project-fastick.herokuapp.com/"
 });
 // Add a request interceptor
 axiosApiIntances.interceptors.request.use(
@@ -30,6 +30,7 @@ axiosApiIntances.interceptors.response.use(
     //   localStorage.clear();
     //   window.location.replace("/login");
     // }
+
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
     return Promise.reject(error);

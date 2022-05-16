@@ -4,20 +4,29 @@ import Footer from "../../components/Footer";
 import CardMovie from "../../components/Card/cardUpcoming";
 import Pagination from "react-paginate";
 import styles from "./Mmovie.module.css";
+import Modal from "../../components/Modal";
 import { useDispatch, useSelector } from "react-redux";
-import { getMovie, postMovie, patchMovie } from "../../stores/action/movie";
+import {
+  getMovie,
+  postMovie,
+  patchMovie,
+  deleteMovie,
+  getMovieName
+} from "../../stores/action/movie";
 import { createSearchParams, useNavigate, useSearchParams } from "react-router-dom";
 function ManageMovie() {
   const [image, setImage] = useState(null);
   const [page, setPage] = useState(1);
   const [update, setUpdate] = useState(false);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const cloudinaryImg = process.env.REACT_APP_CLOUDINARY_RES;
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const params = Object.fromEntries([...searchParams]);
   const movie = useSelector((state) => state.movie);
-  console.log(movie);
   const [form, setForm] = useState({
     name: "",
     category: "",
@@ -42,6 +51,17 @@ function ManageMovie() {
       await dispatch(getMovie(page, 6));
     } catch (error) {}
   };
+  const findMovie = async (e) => {
+    try {
+      if (e.target.value === "") {
+        await dispatch(getDataMovie());
+      } else {
+        await dispatch(getMovieName(e.target.value));
+      }
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
   const handleDetail = (e) => {
     console.log(e);
   };
@@ -65,7 +85,7 @@ function ManageMovie() {
     }
     await dispatch(postMovie(formData));
     getDataMovie();
-    console.log(form);
+    handleReset(e);
   };
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -75,7 +95,13 @@ function ManageMovie() {
     }
     await dispatch(patchMovie(params.movieId, formData));
     getDataMovie();
-    console.log(form);
+    handleReset(e);
+  };
+  const handleDelete = async (id) => {
+    await dispatch(deleteMovie(id));
+    // window.confirm("test");
+    console.log(id);
+    getDataMovie();
   };
   const handleReset = (e) => {
     e.preventDefault();
@@ -140,7 +166,6 @@ function ManageMovie() {
   const handlePage = (data) => {
     setPage(data.selected + 1);
   };
-  const selectedMovie = (id) => {};
   return (
     <div style={{ backgroundColor: "#F5F6F8" }}>
       <Navbar />
@@ -289,7 +314,16 @@ function ManageMovie() {
       {/* --------------------------------------------------------------- */}
       <div className="container">
         <section>
-          <h3>Data Movie</h3>
+          <div className={`mt-5 mb-2 ${styles.sortContainer}`}>
+            <h3 className=""> Data Movie</h3>
+            <div className={styles.searchAndSort}>
+              <select name="" id="">
+                <option value="">Sort</option>
+              </select>
+              <input type="text" placeholder="Search Movie" onChange={(e) => findMovie(e)} />
+            </div>
+          </div>
+
           <div className={styles.dataMovie}>
             {movie.data.map((item, index) => (
               <div
@@ -301,6 +335,7 @@ function ManageMovie() {
                   data={item}
                   handleDetail={handleDetail}
                   handleUpdate={selectUpdate}
+                  handleDelete={handleDelete}
                   statusUpdate={update}
                 />
               </div>

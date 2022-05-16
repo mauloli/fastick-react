@@ -1,9 +1,13 @@
 import axios from "../../utils/axios";
 
-export const getSchedule = (page, limit) => {
+export const getSchedule = (page, limit, movieId, location) => {
   return {
     type: "GET_DATA_SCHEDULE",
-    payload: axios.get(`schedule?page=${page}&limit=${limit}`)
+    payload: axios.get(
+      `schedule?page=${page}&limit=${limit}&searchMovieid=${
+        movieId ? movieId : ""
+      }&searchLocation=${location ? location : ""}`
+    )
   };
 };
 export const getScheduleId = (id) => {
@@ -29,6 +33,6 @@ export const patchSchedule = (id, form) => {
 export const deleteSchedule = (id) => {
   return {
     type: "DELETE_SCHEDULE",
-    payload: axios.patch(`schedule/${id}`)
+    payload: axios.delete(`schedule/${id}`)
   };
 };

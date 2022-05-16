@@ -35,11 +35,7 @@ function Home() {
       // setData(resultMovie.data.data);
       // setPageInfo(resultMovie.data.pagination);
     } catch (error) {
-      console.log(error.response.data);
-      if (error.response.data.stat === 403) {
-        alert("please login first!");
-        navigate("/login");
-      }
+      console.log(error.response);
     }
   };
   const handleDetail = (id) => {

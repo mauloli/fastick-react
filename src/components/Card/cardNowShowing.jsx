@@ -6,9 +6,8 @@ import MovieDetails from "../../page/MovieDetails";
 function index(props) {
   const { name, category, id, image } = props.data;
   // console.log(props);
-  const key = process.env.REACT_APP_CLOUDINARY_RES
-  const cloudinaryImg = key
-  
+  const key = process.env.REACT_APP_CLOUDINARY_RES;
+  const cloudinaryImg = key;
 
   return (
     <div>

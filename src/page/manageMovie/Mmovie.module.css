@@ -90,6 +90,22 @@
   border-color: #5f2eea;
 }
 /* --------------------------------------------------------------- */
+.sortContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.sortContainer select {
+  height: 40px;
+  width: 150px;
+  border-radius: 12px;
+}
+.sortContainer input {
+  width: 200px;
+  height: 40px;
+  border-radius: 12px;
+  margin: 5px 10px;
+}
 .dataMovie {
   width: 100%;
   height: 100%;

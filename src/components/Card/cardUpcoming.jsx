@@ -28,7 +28,7 @@ function index(props) {
                   <button
                     type="button"
                     className={`btn btn-outline-danger ${styles.buttonDelete}`}
-                    onClick={() => props.handleDetail(id)}
+                    onClick={() => props.handleDelete(id)}
                   >
                     Delete
                   </button>

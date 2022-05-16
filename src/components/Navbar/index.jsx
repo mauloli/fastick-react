@@ -1,14 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Navbar.module.css";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import logo from "../../assets/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 
 function NavbarPage() {
+  useEffect(() => {
+    getDataRole();
+  }, []);
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const [isSearch, setIsSearch] = useState(false);
-  const { role } = JSON.parse(localStorage.getItem("dataUser"));
+  const [role, setRole] = useState("");
+
+  const getDataRole = () => {
+    if (token) {
+      const { role } = JSON.parse(localStorage.getItem("dataUser"));
+      setRole(role);
+    }
+  };
+
   return (
     <div>
       <Navbar bg="white" expand="lg" className={styles.navbarContainer}>
@@ -26,15 +37,29 @@ function NavbarPage() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className={`me-auto ${styles.navbarList}`}>
               <Nav.Link href="/login" className={styles.navbarList_text}>
-                <Link to="/" style={{ textDecoration: "none", color: "black" }}>
-                  Home
-                </Link>
+                {role == "admin" ? (
+                  <Link to="/manageSchedule" style={{ textDecoration: "none", color: "black" }}>
+                    Manage Schedule
+                  </Link>
+                ) : (
+                  <Link to="/" style={{ textDecoration: "none", color: "black" }}>
+                    Home
+                  </Link>
+                )}
               </Nav.Link>
               <Nav.Link
                 href={window.location.href == "http://localhost:3000/" ? "#nowShowing" : ""}
                 className={styles.navbarList_text}
               >
-                Movie List
+                {role == "admin" ? (
+                  <Link to="/manageMovie" style={{ textDecoration: "none", color: "black" }}>
+                    Manage Movie
+                  </Link>
+                ) : (
+                  <Link to="/viewAll" style={{ textDecoration: "none", color: "black" }}>
+                    Movie List
+                  </Link>
+                )}
               </Nav.Link>
             </Nav>
             {!token ? (

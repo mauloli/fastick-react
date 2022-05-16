@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import styles from "./ViewAll.module.css";
 import Month from "../../components/Month";
@@ -6,25 +6,72 @@ import Footer from "../../components/Footer";
 import CardMovie from "../../components/Card/cardUpcoming";
 import Pagination from "react-paginate";
 import { useSelector, useDispatch } from "react-redux";
-import { getMovieName, getMovie } from "../../stores/action/movie";
+import { getMovieName, getMovie, getMovieMonth } from "../../stores/action/movie";
 import { useNavigate } from "react-router-dom";
+
 export default function ViewAll() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [page, setPage] = useState(1);
+  const [sort, setSort] = useState({ sort: "" });
+  const [listMonth, setListMonth] = useState({
+    january: false,
+    february: false,
+    march: false,
+    april: false,
+    may: false,
+    june: false,
+    july: false,
+    august: false,
+    september: false,
+    october: false,
+    november: false,
+    december: false
+  });
   const movie = useSelector((state) => state.movie);
   console.log(movie);
+  useEffect(() => {
+    getDataMovie();
+  }, [page]);
+  const getDataMovie = async () => {
+    await dispatch(getMovie(page, 6));
+  };
+  const handleSortMovie = async (e) => {
+    const { name, value } = e.target;
+    console.log(value);
+
+    if (value !== "sort") {
+      await dispatch(getMovie(page, 6, value));
+    } else {
+      await dispatch(getMovie(page, 6));
+    }
+  };
+  const handlePage = (data) => {
+    setPage(data.selected + 1);
+  };
   const searhMovie = async (name) => {
     try {
       if (name.target.value === "") {
-        await dispatch(getMovie(1, 10));
+        await dispatch(getMovie(page, 6));
       } else {
         await dispatch(getMovieName(name.target.value));
       }
     } catch (error) {}
   };
+  const movieMonth = async (month) => {
+    try {
+      await dispatch(getMovieMonth(month));
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+  const unselectMonth = () => {
+    getDataMovie();
+  };
   const handleDetail = (id) => {
     navigate(`/movieDetails/${id}`);
   };
+  console.log(movie);
   return (
     <div>
       <Navbar />
@@ -36,11 +83,11 @@ export default function ViewAll() {
                 <span>List Movie</span>
               </div>
               <div className={styles.headerForm}>
-                <select name="" id="">
-                  <option value="">Sort</option>
+                <select name="" id="" onChange={(e) => handleSortMovie(e)}>
+                  <option value="sort">Sort</option>
 
-                  <option value="">Name</option>
-                  <option value="">Month</option>
+                  <option value="name">Name</option>
+                  <option value="releaseDate">Month</option>
                 </select>
                 <input
                   type="text"
@@ -51,7 +98,7 @@ export default function ViewAll() {
                 />
               </div>
             </div>
-            <Month />
+            <Month handleMonth={movieMonth} handleUnMonth={unselectMonth} listMonth={listMonth} />
           </header>
         </div>
         <div className={`container ${styles.main}`}>
@@ -69,11 +116,11 @@ export default function ViewAll() {
             nextLabel={"Next"}
             breakLabel={"..."}
             pageCount={movie.pageInfo.totalPage}
-            // onPageChange={handlePagination}
+            onPageChange={handlePage}
             containerClassName={"pagination"}
             subContainerClassName={"pages pagination"}
             activeClassName={"active"}
-            // initialPage={page - 1}
+            initialPage={page - 1}
           />
         </div>
       </section>

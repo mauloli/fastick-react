@@ -6,7 +6,12 @@ import Schedule from "../../components/Schedule/admin";
 import Pagination from "react-paginate";
 import moviePoster from "../../assets/movie.JPG";
 import { useDispatch, useSelector } from "react-redux";
-import { getSchedule, postSchedule, patchSchedule } from "../../stores/action/schedule";
+import {
+  getSchedule,
+  postSchedule,
+  patchSchedule,
+  deleteSchedule
+} from "../../stores/action/schedule";
 import { getMovie } from "../../stores/action/movie";
 import axios from "../../utils/axios";
 import { createSearchParams, useNavigate } from "react-router-dom";
@@ -16,22 +21,31 @@ function ManageSchedule() {
   const [dataSchedule, setDataSchedule] = useState({});
   const [page, setPage] = useState(1);
   const [image, setImage] = useState("");
+  const [selectPremier, setSelectPremier] = useState("");
+  const [sortLocation, setSortLocation] = useState();
+  const [sortMovie, setSortMovie] = useState();
   const [updateSchedule, setUpdateSchedule] = useState(false);
   const location = ["Jakarta", "Tangerang", "Bogor", "Tasik", "Bontang"];
   const premier = ["ebuid", "hiflix", "cineone"];
   const cloudinaryImg = process.env.REACT_APP_CLOUDINARY_RES;
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // dispatch(postSchedule(dataSchedule));
+    await dispatch(postSchedule(dataSchedule));
     console.log(dataSchedule);
-    // getDataSchedule();
+    getDataSchedule();
   };
   const handleUpdate = async (e) => {
     e.preventDefault();
     await dispatch(patchSchedule(dataSchedule.id, dataSchedule));
     handleReset(e);
+    getDataSchedule();
+  };
+  const handleDelete = async (e) => {
+    await dispatch(deleteSchedule(e));
+    console.log(e);
     getDataSchedule();
   };
   const handleReset = (e) => {
@@ -68,6 +82,10 @@ function ManageSchedule() {
       setDataSchedule({ ...dataSchedule, [name]: value });
     }
   };
+  const handleChangePremiere = (e) => {
+    setDataSchedule({ ...dataSchedule, premier: e.target.alt });
+    setSelectPremier(e.target.alt);
+  };
   const deleteTime = () => {
     setTime([]);
     setDataSchedule({ ...dataSchedule, time: "" });
@@ -88,13 +106,13 @@ function ManageSchedule() {
   }, []);
   useEffect(() => {
     getDataSchedule();
-  }, [page]);
+  }, [page, sortLocation, sortMovie]);
 
   const schedule = useSelector((state) => state.schedule);
   const movie = useSelector((state) => state.movie);
   const getDataSchedule = async () => {
     try {
-      await dispatch(getSchedule(page, 6));
+      await dispatch(getSchedule(page, 6, sortMovie, sortLocation));
       await dispatch(getMovie(1, 10));
     } catch (error) {
       console.log(error.response);
@@ -132,7 +150,7 @@ function ManageSchedule() {
     setTime(time);
     setUpdateSchedule(!updateSchedule);
   };
-  console.log(dataSchedule.location);
+
   return (
     <div style={{ backgroundColor: "#F5F6F8" }}>
       <Navbar />
@@ -175,9 +193,12 @@ function ManageSchedule() {
               <div>
                 {premier.map((item, index) => (
                   <img
+                    className={`${styles.imagePremier} ${
+                      dataSchedule.premier === item ? styles.imagePremierClick : ""
+                    }`}
                     src={require(`../../assets/${item}.png`)}
                     alt={`${item}`}
-                    onClick={(e) => setDataSchedule({ ...dataSchedule, premier: e.target.alt })}
+                    onClick={(e) => handleChangePremiere(e)}
                   />
                 ))}
               </div>
@@ -271,7 +292,39 @@ function ManageSchedule() {
       {/* -------------------------------------------------------------------  */}
       <div className={`container`}>
         <section className={styles.sectionTwo}>
-          <h3 className="mt-3">Data Schedule</h3>
+          <div className={`${styles.sortContainer} mb-3 mt-5`}>
+            <h3>Data Schedule</h3>
+            <div className={`${styles.sortSelect}`}>
+              <select className={styles.selectSort} name="" id="">
+                <option value="">Sort</option>
+              </select>
+              <select
+                name=""
+                id=""
+                value={sortLocation}
+                onChange={(e) => setSortLocation(e.target.value)}
+              >
+                <option value="">Location</option>
+                {location.map((item, index) => (
+                  <option key={index} value={item}>
+                    {item}
+                  </option>
+                ))}
+              </select>
+              <select
+                name=""
+                id=""
+                value={sortMovie}
+                onChange={(e) => setSortMovie(e.target.value)}
+              >
+                <option value="">Movie</option>
+                {movie.data.map((item, index) => (
+                  <option value={item.id}>{item.name}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+
           <div className={`${styles.dataSchedule}`}>
             {schedule.data.map((item, index) => (
               <div
@@ -282,10 +335,25 @@ function ManageSchedule() {
                 <Schedule
                   schedule={item}
                   selectedSchedule={selectedSchedule}
+                  handleDelete={handleDelete}
                   updateStatus={updateSchedule}
                 />
               </div>
             ))}
+            {schedule.data.length === 0 ? (
+              <div
+                style={{
+                  height: "300px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center"
+                }}
+              >
+                <h1>Schedule Not Found</h1>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
           <div className={`${styles.pagination} d-flex justify-content-center`}>
             <Pagination

@@ -50,7 +50,12 @@ function Admin(props) {
                 >
                   {`${props.updateStatus ? "Cancel" : "Update"}`}
                 </button>
-                <button className="btn btn-sm btn-outline-danger" id="button__nav" type="button">
+                <button
+                  className="btn btn-sm btn-outline-danger"
+                  id="button__nav"
+                  type="button"
+                  onClick={() => props.handleDelete(props.schedule.id)}
+                >
                   Delete{" "}
                 </button>
               </div>
