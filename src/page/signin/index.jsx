@@ -105,7 +105,7 @@ function SignIn() {
             </div>
 
             <p className={styles.forgot__password}>
-              forgot your password? <a href="">reset now</a>
+              forgot your password? <p>reset now</p>
             </p>
             <p className={styles.register__account}>
               dont have an account? <Link to={"/register"}>Sign Up</Link>
