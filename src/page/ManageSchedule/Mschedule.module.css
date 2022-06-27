@@ -119,4 +119,12 @@
   .formSchedule {
     display: block;
   }
+  .secondRow {
+    /* display: block; */
+  }
+  .dataSchedule {
+    /* display: flex;
+    white-space: nowrap;
+    overflow-x: auto; */
+  }
 }

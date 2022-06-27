@@ -13,6 +13,7 @@ export default function ViewAll() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
+  const limit = 8;
   const [sort, setSort] = useState({ sort: "" });
   const [listMonth, setListMonth] = useState({
     january: false,
@@ -34,16 +35,16 @@ export default function ViewAll() {
     getDataMovie();
   }, [page]);
   const getDataMovie = async () => {
-    await dispatch(getMovie(page, 6));
+    await dispatch(getMovie(page, limit));
   };
   const handleSortMovie = async (e) => {
     const { name, value } = e.target;
     console.log(value);
 
     if (value !== "sort") {
-      await dispatch(getMovie(page, 6, value));
+      await dispatch(getMovie(page, limit, value));
     } else {
-      await dispatch(getMovie(page, 6));
+      await dispatch(getMovie(page, limit));
     }
   };
   const handlePage = (data) => {
@@ -52,7 +53,7 @@ export default function ViewAll() {
   const searhMovie = async (name) => {
     try {
       if (name.target.value === "") {
-        await dispatch(getMovie(page, 6));
+        await dispatch(getMovie(page, limit));
       } else {
         await dispatch(getMovieName(name.target.value));
       }

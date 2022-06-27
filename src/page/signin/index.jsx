@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "../../utils/axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import banner from "../../assets/Group 7.png";
 import logo from "../../assets/tickitz 1.png";
 import styles from "./Login.module.css";
@@ -108,7 +108,7 @@ function SignIn() {
               forgot your password? <a href="">reset now</a>
             </p>
             <p className={styles.register__account}>
-              dont have an account? <a href="">Sign Up</a>
+              dont have an account? <Link to={"/register"}>Sign Up</Link>
             </p>
           </div>
         </section>

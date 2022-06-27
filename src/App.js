@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import BasicCounter from "./page/basic/Counter/classComponent";
 import BasicReact from "./page/basic/React";
 import BasicLogin from "./page/basic/login";
-import SignIn from "./page/Signin/index";
+import SignIn from "./page/signin";
 import SignUp from "./page/Signup";
 import Home from "./page/Home";
 import MovieDetails from "./page/MovieDetails";

@@ -1,2 +1,75 @@
 .main {
+  display: flex;
+  margin-top: 35px;
+}
+.firstColumns {
+  flex: 1;
+}
+.secondColumns {
+  flex: 3;
+}
+.imageContainer {
+  width: 90%;
+  height: 400px;
+  background-color: #fff;
+  padding: 10px;
+  margin: 10px 0px;
+  border-radius: 20px;
+}
+.sectionImg {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  justify-content: center;
+}
+.sectionHeader {
+  display: flex;
+  margin-left: 20px;
+}
+
+.sectionBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px, 0px;
+}
+.image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+.sectionFooter {
+  display: flex;
+  justify-content: center;
+}
+/* ----------------------------------------------------------- */
+.formContainer {
+  margin: 10px 0px;
+}
+.formNavbar {
+  display: flex;
+  background-color: #fff;
+  height: 70px;
+  align-items: center;
+  justify-content: space-around;
+}
+.formDetail {
+  background-color: #fff;
+  height: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 50px;
+}
+.formDetail .inputDetail {
+  height: 70px;
+  margin: 10px;
+}
+.formDetail .spanDetail {
+  margin: 10px 10px 0px 10px;
+}
+/* ------------------------------------------------------------- */
+.formPrivacy {
+  background-color: #fff;
+  height: 350px;
+  margin-top: 20px;
 }

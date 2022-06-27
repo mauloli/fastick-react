@@ -17,6 +17,7 @@ import { createSearchParams, useNavigate, useSearchParams } from "react-router-d
 function ManageMovie() {
   const [image, setImage] = useState(null);
   const [page, setPage] = useState(1);
+  const limit = 8;
   const [update, setUpdate] = useState(false);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -48,7 +49,7 @@ function ManageMovie() {
   // const [duration, setDuration] = useState("");
   const getDataMovie = async () => {
     try {
-      await dispatch(getMovie(page, 6));
+      await dispatch(getMovie(page, limit));
     } catch (error) {}
   };
   const findMovie = async (e) => {

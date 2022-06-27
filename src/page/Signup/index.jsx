@@ -4,6 +4,7 @@ import logo from "../../assets/tickitz 1.png";
 import banner from "../../assets/Group 7.png";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../../stores/action/auth";
+import { Link } from "react-router-dom";
 function SignUp() {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.auth);
@@ -107,7 +108,7 @@ function SignUp() {
               forgot your password? <a href="">reset now</a>
             </p>
             <p className={styles.register__account}>
-              dont have an account? <a href="">Sign Up</a>
+              already have an account? <Link to={`/login`}>Sign In</Link>
             </p>
           </div>
         </section>

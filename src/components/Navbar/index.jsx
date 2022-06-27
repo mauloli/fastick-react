@@ -19,6 +19,9 @@ function NavbarPage() {
       setRole(role);
     }
   };
+  const onSignUp = () => {
+    navigate("/register");
+  };
 
   return (
     <div>
@@ -63,9 +66,11 @@ function NavbarPage() {
               </Nav.Link>
             </Nav>
             {!token ? (
-              <button className={styles.buttonSignUp}>Sign Up</button>
+              <button className={styles.buttonSignUp} onClick={() => navigate("/register")}>
+                Sign Up
+              </button>
             ) : (
-              <form action="">
+              <form className={styles.navbarProfile} action="">
                 <input
                   className={isSearch ? `` : styles.inputIsSearch}
                   type="text"
@@ -73,15 +78,25 @@ function NavbarPage() {
                   style={{ textAlign: "center", height: "40px", borderRadius: "16px" }}
                 />
                 <i
-                  className={`bi bi-search ${isSearch ? styles.isSearch : ""}`}
+                  className={`bi bi-search ${isSearch ? styles.isSearch : ""}  ${
+                    styles.iconSearch
+                  }`}
                   style={{ margin: "0px 25px", cursor: "pointer" }}
                   onClick={() => setIsSearch(!isSearch)}
                 ></i>
-                <img
-                  src={require("../../assets/user1.png")}
-                  alt=""
-                  style={{ width: "46px", height: "46px", borderRadius: "50%", margin: "0px 25px" }}
-                />
+                <div className={styles.profileLogout}>
+                  <img
+                    src={require("../../assets/user1.png")}
+                    alt=""
+                    style={{
+                      width: "46px",
+                      height: "46px",
+                      borderRadius: "50%",
+                      margin: "0px 25px"
+                    }}
+                  />
+                  <button className={styles.logout}>Logout</button>
+                </div>
               </form>
             )}
           </Navbar.Collapse>

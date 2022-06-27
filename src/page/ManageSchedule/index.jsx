@@ -20,6 +20,7 @@ function ManageSchedule() {
   const [time, setTime] = useState([]);
   const [dataSchedule, setDataSchedule] = useState({});
   const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState();
   const [image, setImage] = useState("");
   const [selectPremier, setSelectPremier] = useState("");
   const [sortLocation, setSortLocation] = useState();
@@ -28,6 +29,7 @@ function ManageSchedule() {
   const location = ["Jakarta", "Tangerang", "Bogor", "Tasik", "Bontang"];
   const premier = ["ebuid", "hiflix", "cineone"];
   const cloudinaryImg = process.env.REACT_APP_CLOUDINARY_RES;
+  const [width, setWidth] = useState(window.innerWidth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -103,16 +105,21 @@ function ManageSchedule() {
   };
   useEffect(() => {
     getDataSchedule();
+    const handleResizeWindow = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleResizeWindow);
+    return () => {
+      window.removeEventListener("resize", handleResizeWindow);
+    };
   }, []);
   useEffect(() => {
     getDataSchedule();
-  }, [page, sortLocation, sortMovie]);
+  }, [page, sortLocation, sortMovie, width]);
 
   const schedule = useSelector((state) => state.schedule);
   const movie = useSelector((state) => state.movie);
   const getDataSchedule = async () => {
     try {
-      await dispatch(getSchedule(page, 6, sortMovie, sortLocation));
+      await dispatch(getSchedule(page, limit, sortMovie, sortLocation));
       await dispatch(getMovie(1, 10));
     } catch (error) {
       console.log(error.response);
@@ -150,7 +157,7 @@ function ManageSchedule() {
     setTime(time);
     setUpdateSchedule(!updateSchedule);
   };
-
+  console.log(width);
   return (
     <div style={{ backgroundColor: "#F5F6F8" }}>
       <Navbar />
@@ -249,7 +256,7 @@ function ManageSchedule() {
                     type="text"
                     name=""
                     id=""
-                    placeholder="+"
+                    placeholder=""
                     onKeyDown={(e) => handleChange(e)}
                   />
                   {time.map((item) => (

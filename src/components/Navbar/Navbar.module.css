@@ -5,11 +5,14 @@
   margin-left: 30px;
 }
 .navbarList_text {
-  font-size: 20px;
+  font-size: 16px;
   color: black !important;
   margin-left: 20px;
 }
-
+.navbarProfile {
+  display: flex;
+  align-items: center;
+}
 .buttonSignUp {
   padding: 5px 50px;
   background-color: rgba(95, 46, 234, 1);
@@ -20,14 +23,31 @@
 .inputIsSearch {
   display: none;
 }
+.iconSearch {
+  /* align-items: center !important; */
+}
 .isSearch {
   position: absolute;
   right: 320px;
   top: 25px;
 }
+.profileLogout {
+  /* width: 55px; */
+  display: block;
+}
+.logout {
+  padding: 5px 20px;
+  background-color: rgba(95, 46, 234, 1);
+  color: white;
+  border-radius: 5px;
+  display: none;
+}
 @media (max-width: 376px) {
   .imgLogo {
     margin-left: 20px;
+  }
+  .iconSearch {
+    display: none;
   }
   .navbarList_text {
     margin-left: 0px;
