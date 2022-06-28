@@ -61,8 +61,9 @@
   padding: 50px;
 }
 .formDetail .inputDetail {
-  height: 70px;
+  height: 60px;
   margin: 10px;
+  padding-left: 20px;
 }
 .formDetail .spanDetail {
   margin: 10px 10px 0px 10px;
@@ -72,4 +73,17 @@
   background-color: #fff;
   height: 350px;
   margin-top: 20px;
+  padding: 20px;
+}
+.privacyContainer {
+  display: flex;
+  margin-top: 50px;
+}
+.privacyContainer .inputDetail {
+  height: 60px;
+  margin-top: 10px;
+  padding-left: 20px;
+}
+.privacyContainer div {
+  margin-left: 20px;
 }

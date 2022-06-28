@@ -22,6 +22,9 @@ function NavbarPage() {
   const onSignUp = () => {
     navigate("/register");
   };
+  const handleProfile = () => {
+    navigate("/profile");
+  };
 
   return (
     <div>
@@ -87,12 +90,14 @@ function NavbarPage() {
                 <div className={styles.profileLogout}>
                   <img
                     src={require("../../assets/user1.png")}
+                    onClick={handleProfile}
                     alt=""
                     style={{
                       width: "46px",
                       height: "46px",
                       borderRadius: "50%",
-                      margin: "0px 25px"
+                      margin: "0px 25px",
+                      cursor: "pointer"
                     }}
                   />
                   <button className={styles.logout}>Logout</button>

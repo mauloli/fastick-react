@@ -23,6 +23,7 @@ function SignIn() {
       setMessage(resultLogin.data.msg);
       localStorage.setItem("token", resultLogin.data.data.token);
       localStorage.setItem("refreshToken", resultLogin.data.data.refreshToken);
+      localStorage.setItem("id", resultLogin.data.data.id);
       const resultUser = await axios.get(`user/${resultLogin.data.data.id}`);
       const dataUser = resultUser.data.data;
       console.log(dataUser);
