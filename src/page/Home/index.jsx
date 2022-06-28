@@ -33,7 +33,6 @@ function Home() {
       await dispatch(getMovie(page, limit));
 
       // setData(resultMovie.data.data);
-      // setPageInfo(resultMovie.data.pagination);
     } catch (error) {
       console.log(error.response);
     }
