@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Navbar.module.css";
+import axios from "../../utils/axios";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import logo from "../../assets/logo.png";
 import { Link, useNavigate } from "react-router-dom";
@@ -24,6 +25,13 @@ function NavbarPage() {
   };
   const handleProfile = () => {
     navigate("/profile");
+  };
+
+  const handleLogout = async () => {
+    localStorage.clear();
+    const result = await axios.post(`auth/logout`);
+    console.log(result);
+    navigate("/login");
   };
 
   return (
@@ -88,18 +96,25 @@ function NavbarPage() {
                   onClick={() => setIsSearch(!isSearch)}
                 ></i>
                 <div className={styles.profileLogout}>
-                  <img
-                    src={require("../../assets/user1.png")}
-                    onClick={handleProfile}
-                    alt=""
-                    style={{
-                      width: "46px",
-                      height: "46px",
-                      borderRadius: "50%",
-                      margin: "0px 25px",
-                      cursor: "pointer"
-                    }}
-                  />
+                  <NavDropdown
+                    title={
+                      <img
+                        src={require("../../assets/user1.png")}
+                        alt=""
+                        style={{
+                          width: "46px",
+                          height: "46px",
+                          borderRadius: "50%",
+                          margin: "0px 25px",
+                          cursor: "pointer"
+                        }}
+                      />
+                    }
+                  >
+                    <NavDropdown.Item onClick={handleProfile}>Profile</NavDropdown.Item>
+                    <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
+                  </NavDropdown>
+
                   <button className={styles.logout}>Logout</button>
                 </div>
               </form>

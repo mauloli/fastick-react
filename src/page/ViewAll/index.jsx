@@ -91,6 +91,7 @@ export default function ViewAll() {
                   <option value="releaseDate">Month</option>
                 </select>
                 <input
+                  style={{ paddingLeft: "10px" }}
                   type="text"
                   placeholder="Search Movie Name"
                   onChange={(e) => {

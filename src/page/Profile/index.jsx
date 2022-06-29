@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Navbar from "../../components/Navbar/index";
 import styles from "./Profile.module.css";
 import Footer from "../../components/Footer";
 import axios from "../../utils/axios";
+import { useNavigate } from "react-router-dom";
 function Profile() {
+  const navigate = useNavigate();
   const dataUser = JSON.parse(localStorage.getItem("dataUser"));
   const cloudinaryImg = process.env.REACT_APP_CLOUDINARY_RES;
+  const fileInput = useRef();
   const [tabs, setTabs] = useState("account");
   const [formDetails, setFormDetail] = useState({
     firstName: "",
@@ -16,12 +19,48 @@ function Profile() {
     newPassword: "",
     confirmPassword: ""
   });
+  const [formImage, setFormImage] = useState({ image: null });
   const [detailUser, setDetailUser] = useState({});
 
-  const handleChange = (e) => {
-    const { value, name } = e.target;
-    setFormDetail({ ...formDetails, [name]: value });
+  const selectFile = () => {
+    fileInput.current.click();
   };
+
+  const handleChange = async (e) => {
+    const { value, name, files } = e.target;
+    if (name == "image") {
+      const newImage = { image: files[0] };
+      const formData = new FormData();
+      for (const data in newImage) {
+        formData.append(data, newImage[data]);
+      }
+      try {
+        const result = await axios.patch(`user/image/${dataUser.id}`, formData);
+        await getDataUser();
+        await alert(result.data.msg);
+      } catch (error) {
+        console.log(error.response.data.msg);
+        alert(error.response.data.msg);
+      }
+    } else {
+      setFormDetail({ ...formDetails, [name]: value });
+    }
+  };
+
+  const updateImage = async () => {
+    try {
+      const image = new FormData();
+      for (const data in formImage) {
+        image.append(data, formImage[data]);
+      }
+      const result = await axios.patch(`user/image/${dataUser.id}`, image);
+      getDataUser();
+      alert(result.data.msg);
+    } catch (error) {
+      console.log(error.response.data.msg);
+    }
+  };
+
   const handleChangePassword = (e) => {
     const { value, name } = e.target;
     setFormPassword({ ...formPassword, [name]: value });
@@ -54,16 +93,26 @@ function Profile() {
         alert("password not match!");
       } else {
         const result = await axios.patch(`user/password/${dataUser.id}`, formPassword);
+        alert(result.data.msg);
+        setFormPassword({ ...formPassword, newPassword: "", confirmPassword: "" });
       }
     } catch (error) {
       console.log(error.response.data.msg);
     }
   };
 
+  const handleLogout = async () => {
+    localStorage.clear();
+    const result = await axios.post(`auth/logout`);
+    console.log(result);
+    navigate("/login");
+  };
+
   useEffect(() => {
     getDataUser();
   }, []);
-  console.log(formPassword);
+
+  console.log(formImage);
   return (
     <div style={{ backgroundColor: "#F5F6F8", height: "100%" }}>
       <Navbar />
@@ -83,6 +132,14 @@ function Profile() {
                       : `${cloudinaryImg}${detailUser.image}`
                   }
                   alt=""
+                  onClick={selectFile}
+                />
+                <input
+                  onChange={(e) => handleChange(e)}
+                  type="file"
+                  name="image"
+                  ref={fileInput}
+                  style={{ display: "none" }}
                 />
                 <span className="mt-3 mb-3">{`${detailUser.FirstName} ${detailUser.lastName}`}</span>
                 <span className="mt-3 mb-3" style={{ color: "#4E4B66", fontSize: "14px" }}>
@@ -91,7 +148,11 @@ function Profile() {
               </div>
               <hr />
               <div className={`${styles.sectionFooter} mt-4`}>
-                <button className=" btn btn-primary" style={{ width: "60%" }}>
+                <button
+                  onClick={handleLogout}
+                  className=" btn btn-primary"
+                  style={{ width: "60%" }}
+                >
                   Logout
                 </button>
               </div>

@@ -64,13 +64,14 @@
 }
 .input {
   display: block;
-  padding: 10px 100px;
+  padding: 10px;
+  padding-left: 20px;
+  width: 381px;
   border: 1px solid #dedede;
   border-radius: 9px;
   border-color: rgba(222, 222, 222, 1);
   background: #fcfdfe;
   margin: 10px;
-  text-align: center;
 }
 .button_main {
   display: flex;
