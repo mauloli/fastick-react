@@ -36,7 +36,16 @@ REACT_APP_CLOUDINARY_RES = imageHost // localhost Image
 
 ```
 
-[More About Redux](https://redux.js.org/)
+## Preview
+
+<img src="https://res.cloudinary.com/dfoi1ro2a/image/upload/v1656910649/Screen_Shot_2022-06-29_at_18.43.24_xtct4p.png" width="100%" />
+<img src="https://res.cloudinary.com/dfoi1ro2a/image/upload/v1656910650/Screen_Shot_2022-06-29_at_18.44.22_u81sa1.png" width="100%" />
+<img src="https://res.cloudinary.com/dfoi1ro2a/image/upload/v1656910649/Screen_Shot_2022-06-29_at_18.47.09_ojpgq6.png" width="100%" />
+<img src="https://res.cloudinary.com/dfoi1ro2a/image/upload/v1656910650/Screen_Shot_2022-06-29_at_18.43.43_q9akkt.png" width="100%" />
+
+
+
+[FASTICK](https://fastick-react.netlify.app/)
 
 
 ## License
