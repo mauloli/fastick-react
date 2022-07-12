@@ -9,7 +9,7 @@ function Navbar() {
   return (
     <>
       <Link to="/basic/counter">Counter App</Link> | <Link to="/basic/react">Basic React</Link> |{" "}
-      <button onClick={handleLogout}>Logout</button>
+      <button onClick={handleLogout}>Logoutt</button>
     </>
   );
 }
